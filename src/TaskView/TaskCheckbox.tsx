@@ -7,8 +7,8 @@ export interface Props {
 
 const TaskCheckbox = ({ checked, onChange }: Props) => {
     return checked
-        ? <input type="checkbox" className="inline mx-2" onChange={onChange} defaultChecked />
-        : <input type="checkbox" className="inline mx-2" onChange={onChange} />;
+        ? <input type="checkbox" className="inline mx-2" onChange={onChange} title="Mark not done" defaultChecked />
+        : <input type="checkbox" className="inline mx-2" onChange={onChange} title="Mark as done" />;
 };
 
 export default TaskCheckbox
