@@ -5,7 +5,7 @@ const MoreButton = () => {
         <div className="button border rounded-lg">
             <span>...</span>
         </div>
-    )
+    );
 };
 
 export default MoreButton;

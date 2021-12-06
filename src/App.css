@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -35,10 +35,65 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+
+/* PT Sans */
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+/* Hind Madurai */
+@import url('https://fonts.googleapis.com/css2?family=Hind+Madurai:wght@300;400;500;600;700&display=swap');
+
+/* Fira Sans 600 */
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@600&display=swap');
+
+/* Outfit */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+/* Fira Sans Extra Condensed 700 */
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Extra+Condensed:ital,wght@0,700;1,700&display=swap');
+
+.font-display {
+  font-family: 'Fira Sans Extra Condensed', sans-serif;
+  font-weight: 700;
 }
 
+.font-pt {
+  font-family: 'PT Sans', sans-serif;
+}
+
+.font-fira-600 {
+  font-family: 'Fira Sans', sans-serif;
+  font-weight: 600;
+}
+
+.font-hind {
+  font-family: 'Hind Madurai', sans-serif;
+}
+
+.font-outfit {
+  font-family: 'Outfit', sans-serif;
+}
 
 .site-header {
+  max-width: 14rem;
+  width: 100%;
+}
+
+.collapsed {
+  max-width: 4rem;
+}
+
+/* .main-body > * + * {
+  margin-top: 1rem;
+} */
+
+/* .footer {
+  position: sticky;
+  top: 100vh;
+} */
+
+/* .site-header {
   display: flex;
   justify-content: space-between;
 }
@@ -55,4 +110,4 @@
 .button {
   cursor: pointer;
   width: max-content;
-}
+} */
