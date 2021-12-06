@@ -1,14 +1,17 @@
 import React from 'react';
-import logo from './logo.svg';
+import Header from './Header';
+import MoreButton from './MoreButton';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
+      <Header />
+      <MoreButton />
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <img src="https://source.unsplash.com/random" className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.tsx</code> and save to reload.
+          Edit <code>src/App.tsx</code> and save this file to reload.
         </p>
         <a
           className="App-link"

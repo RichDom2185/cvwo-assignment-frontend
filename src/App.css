@@ -36,3 +36,23 @@
     transform: rotate(360deg);
   }
 }
+
+
+.site-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.site-header nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.button {
+  cursor: pointer;
+  width: max-content;
+}
