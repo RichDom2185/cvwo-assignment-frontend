@@ -1,9 +1,9 @@
-import TaskList from './TaskView/TaskList';
+import TaskList from './components/taskView/TaskList';
 import Footer from './Footer';
 
 const Body = () => {
     return (
-        <div className="body-outer h-screen flex-grow flex flex-col">
+        <div className="h-screen flex-grow flex flex-col">
             <div className="main-body flex-grow overflow-y-auto p-6 space-y-4">
                 <h1 className="font-display text-6xl">
                     Lorem ipsum dolor sit amet consectetur, adipisicing elit. Numquam, soluta?

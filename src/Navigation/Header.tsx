@@ -29,7 +29,7 @@ const Header = () => {
         // <header className="site-header bg-gray-50 fixed top-0 bottom-0 left-0 flex flex-col font-outfit">
         <header id="sidebar" className="transition-all duration-300 site-header bg-gray-50 h-screen flex flex-col font-outfit p-4 shadow">
             <CollapseSidebarButton onClick={collapseSidebar} collapsed={collapsed} />
-            <h1 id="app-title" className={"font-bold text-4xl text-center mt-4 mb-10" + (collapsed ? ' hidden' : '')}>Todo App</h1>
+            <h1 id="app-title" className={"font-bold text-4xl text-gray-700 text-center mt-4 mb-10" + (collapsed ? ' hidden' : '')}>thing.do</h1>
             <div className={"header-content flex flex-col flex-grow justify-between" + (collapsed ? ' hidden' : '')}>
                 <nav className="main-nav">
                     <span className="header-label uppercase text-sm font-medium mx-2 text-gray-600 tracking-wider">Workspaces</span>

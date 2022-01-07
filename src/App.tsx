@@ -1,15 +1,17 @@
-import React from 'react';
-import Header from './Navigation/Header';
-import Body from './Body';
 import MoreButton from './MoreButton';
 import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Main from './pages/Main';
+import Login from './pages/Login';
 
 function App() {
   return (
-    <div className="flex justify-between items-start">
-      <Header />
-      <Body />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Main />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </Router>
     // <div className="App">
     //   <Header />
     //   <MoreButton />
