@@ -1,5 +1,3 @@
-import React from 'react';
-
 const MoreButton = () => {
     return (
         <div className="button border rounded-lg">

@@ -84,12 +84,12 @@
   max-width: 4rem;
 }
 
-.separator::before,
+/* .separator::before,
 .separator::after {
   content: '';
   flex: 1;
   border-bottom: 1px solid #eaeaea;
-}
+} */
 
 /* .main-body > * + * {
   margin-top: 1rem;

@@ -1,7 +1,7 @@
 import Header from '../navigation/Header';
 import Body from '../Body';
 
-const Main = () => {
+const MainPage = () => {
     return (
         <div className="flex justify-between items-start">
             <Header />
@@ -10,4 +10,4 @@ const Main = () => {
     );
 };
 
-export default Main;
+export default MainPage;
