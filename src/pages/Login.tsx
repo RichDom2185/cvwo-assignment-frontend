@@ -7,12 +7,12 @@ const Login = () => {
         //         <LoginForm />
         //     </div>
         // </div >
-        <div className="h-screen bg-gray-50 flex flex-col">
-            <div id="logo" className="flex space-x-4 mx-4 my-2">
-                <img src="https://www.gstatic.com/images/branding/product/1x/keep_48dp.png" alt="Logo"/>
-                <h1 className="font-outfit font-bold text-5xl text-gray-700">thing.do</h1>
-            </div>
-            <div className="flex-grow flex justify-center items-center">
+        <div className="min-h-screen bg-gray-200 flex">
+            <div className="flex-grow flex flex-col justify-center items-center pt-6 sm:pb-6">
+                <div id="logo" className="flex space-x-4 mx-4 mb-8">
+                    <img src="https://www.gstatic.com/images/branding/product/1x/keep_48dp.png" alt="Logo" />
+                    <h1 className="font-outfit font-bold text-5xl text-gray-700">thing.do</h1>
+                </div>
                 <LoginForm />
             </div>
         </div>
