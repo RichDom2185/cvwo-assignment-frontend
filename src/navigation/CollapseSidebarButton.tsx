@@ -1,8 +1,7 @@
-import { MouseEventHandler } from "react";
 import { HiOutlineChevronDoubleLeft, HiOutlineChevronDoubleRight } from "react-icons/hi";
 
-export interface Props {
-    onClick: MouseEventHandler;
+interface Props {
+    onClick: React.MouseEventHandler;
     collapsed: boolean;
 };
 

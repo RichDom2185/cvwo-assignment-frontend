@@ -3,9 +3,10 @@
 import AddToCalendarButton from "../components/AddToCalendarButton";
 import DatePicker from "../components/DatePicker";
 import Header from "../navigation/Header";
-import Footer from "../Footer";
+import Footer from "../components/Footer";
 import TagChip from "../components/TagChip";
 import FormLabel from "../components/detailsView/FormLabel";
+import Appbar from "../components/Appbar";
 import { useState } from "react";
 
 export type TodoItem = {
@@ -73,8 +74,9 @@ const DetailsPage = () => {
         <div className="flex justify-between items-start">
             <Header />
             <div className="h-screen flex-grow flex flex-col">
+                <Appbar />
                 <div className="main-body flex-grow overflow-y-auto p-6 space-y-4">
-                    <p>Back to Tasks List</p>
+                    {/* <p>Back to Tasks List</p> */}
                     <form className="w-full max-w-6xl space-y-3 mx-auto" onSubmit={formSubmitHandler}>
                         <div className="flex items-center justify-between gap-x-4">
                             <input type="text" name="title" id="title" placeholder="Title" className="flex-grow transition font-outfit font-medium text-2xl tracking-wide appearance-none border-b focus:border-blue-500 text-gray-700 py-2 px-2 leading-tight focus:outline-none" onChange={formChangeHandler} value={todoItem.title} />

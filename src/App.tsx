@@ -7,6 +7,12 @@ import DetailsPage from './pages/DetailsPage';
 import TestingPage from './pages/TestingPage';
 // import { compressToUTF16, decompressFromUTF16 } from 'lz-string';
 
+export type User = {
+  name: string;
+  email: string;
+  token: string;
+}
+
 function App() {
   return (
     <Router>

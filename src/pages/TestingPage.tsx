@@ -1,16 +1,6 @@
 // import AddToCalendarButton from "../components/AddToCalendarButton";
 import DatePicker from "../components/DatePicker";
 
-export type TodoItem = {
-    id: string,
-    title?: string,
-    description?: string,
-    completed: boolean,
-    tags?: string[],
-    reminderDate?: Date,
-    reminderTime?: Date,
-};
-
 const TestingPage = () => {
     return (
         <div className="flex justify-center items-center min-h-screen">
