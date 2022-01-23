@@ -2,9 +2,19 @@ import { useState } from "react";
 
 import NavButton from "./NavButton";
 import CollapseSidebarButton from "./CollapseSidebarButton";
+import HeaderMenuItem from "./HeaderMenuItem";
+
+const aboutMessage: string = `\
+thing.do © 2022 Richard Dominick
+
+thing.do is a simple todo app built with React, TypeScript, and Ruby on Rails. It was built as part of the 2021 winter assignment by National University of Singapore's (NUS) Computing Voluntary and Welfare Organisation (CVWO). This app is open source and is available on GitHub at https://github.com/RichDom2185/cvwo-assignment-frontend`;
 
 const Header = () => {
     const [collapsed, setCollapsed] = useState(false);
+
+    const displayAboutMessage: React.MouseEventHandler = () => {
+        alert(aboutMessage);
+    };
 
     function collapseSidebar(): void {
         // console.log("collapse sidebar");
@@ -35,14 +45,16 @@ const Header = () => {
                     <span className="header-label uppercase text-sm font-medium mx-2 text-gray-600 tracking-wider">Workspaces</span>
                     <ul className="space-y-3">
                         <NavButton text="Default Workspace" />
-                        <NavButton text="2" />
+                        {/* <NavButton text="2" />
                         <NavButton text="3" />
                         <NavButton text="4" />
-                        <NavButton text="5" />
+                        <NavButton text="5" /> */}
                     </ul>
                 </nav>
                 <div className="secondary-nav">
-                    <span className="header-label uppercase text-sm font-medium mx-2 text-gray-600 tracking-wider">Settings</span>
+                    <HeaderMenuItem onClick={displayAboutMessage}>
+                        About
+                    </HeaderMenuItem>
                 </div>
             </div>
         </header>
