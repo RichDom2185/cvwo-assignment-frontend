@@ -1,7 +1,7 @@
 import TaskList from './components/taskView/TaskList';
 import Footer from './Footer';
 
-const Body = () => {
+const MainBody = () => {
     return (
         <div className="h-screen flex-grow flex flex-col">
             <div className="main-body flex-grow overflow-y-auto p-6 space-y-4">
@@ -18,4 +18,4 @@ const Body = () => {
     );
 };
 
-export default Body;
+export default MainBody;
