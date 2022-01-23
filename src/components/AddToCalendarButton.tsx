@@ -1,4 +1,3 @@
-import { MouseEventHandler } from 'react';
 import { FaRegCalendarPlus } from 'react-icons/fa';
 import { TodoItem } from '../pages/DetailsPage';
 
@@ -7,7 +6,7 @@ interface Props {
 };
 
 const AddToCalendarButton = ({ item }: Props) => {
-    const handleClick : MouseEventHandler = (e) => {
+    const handleClick : React.MouseEventHandler = (e) => {
         // console.log('Add to calendar');
         // window.open('https://calendar.google.com/calendar/r/eventedit?text=' + item.title + '&dates=' + item.reminderDate?.toISOString() + '/' + item.reminderDate?.toISOString() + '&details=' + item.description + '&location=' + item.tags?.join(', ') + '&ctz=America/New_York');
         const dateString : string = item.reminderDate?.toISOString().replace(/-|:|\.\d\d\d/g,"") ?? '';

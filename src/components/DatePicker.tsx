@@ -15,7 +15,7 @@ import { HiOutlineCalendar, HiOutlineChevronLeft, HiOutlineChevronRight } from '
 type DatepickerType = "date" | "month" | "year";
 
 export default function DatePicker() {
-    const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const DAYS = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
     const [dayCount, setDayCount] = useState<Array<number>>([]);
     const [blankDays, setBlankDays] = useState<Array<number>>([]);
     const [showDatepicker, setShowDatepicker] = useState(false);
@@ -152,7 +152,7 @@ export default function DatePicker() {
                 </div>
                 {showDatepicker && (
                     <div
-                        className="bg-white mt-12 rounded-lg shadow p-4 absolute top-0 left-0"
+                        className="bg-white border border-blue-200 mt-14 rounded-lg shadow-xl shadow-blue-200 p-4 absolute top-0 left-0"
                         style={{ width: "17rem" }}
                     >
                         <div className="flex justify-between items-center mb-2">
@@ -186,7 +186,7 @@ export default function DatePicker() {
                             {type === "date" && (
                                 <div
                                     onClick={showMonthPicker}
-                                    className="transition flex-grow p-1 text-lg font-bold text-gray-800 cursor-pointer hover:bg-gray-200 rounded-lg"
+                                    className="transition flex-grow p-1 text-lg font-semibold text-gray-800 cursor-pointer hover:bg-gray-200 rounded-lg"
                                 >
                                     <p className="text-center">
                                         {format(datepickerHeaderDate, "MMMM yyyy")}
@@ -195,7 +195,7 @@ export default function DatePicker() {
                             )}
                             {type === "month" && (<div
                                 onClick={showYearPicker}
-                                className="transition flex-grow p-1 text-lg font-bold text-gray-800 cursor-pointer hover:bg-gray-200 rounded-lg"
+                                className="transition flex-grow p-1 text-lg font-semibold text-gray-800 cursor-pointer hover:bg-gray-200 rounded-lg"
                             >
                                 <p className="text-center">
                                     {format(datepickerHeaderDate, "yyyy")}
@@ -220,7 +220,7 @@ export default function DatePicker() {
                                             style={{ width: "14.26%" }}
                                             className="px-1"
                                         >
-                                            <div className="text-gray-800 font-medium text-center text-xs">
+                                            <div className="text-gray-400 font-semibold text-center text-xs">
                                                 {day}
                                             </div>
                                         </div>
@@ -242,8 +242,8 @@ export default function DatePicker() {
                                         >
                                             <div
                                                 onClick={setDateValue(d)}
-                                                className={`cursor-pointer text-center text-sm leading-none rounded-md leading-loose transition ease-in-out duration-100 ${isToday(d)
-                                                    ? "bg-blue-500 text-white font-medium"
+                                                className={`transition duration-75 cursor-pointer text-center text-sm leading-none rounded-md leading-loose ${isToday(d)
+                                                    ? "bg-blue-500 text-white font-bold hover:bg-blue-700"
                                                     : "text-gray-700 hover:bg-blue-100"
                                                     }`}
                                             >
@@ -262,14 +262,12 @@ export default function DatePicker() {
                                         <div
                                             key={i}
                                             onClick={setMonthValue(i)}
-                                            style={{ width: "25%" }}
-                                        >
+                                            style={{ width: "25%" }}>
                                             <div
-                                                className={`cursor-pointer p-5 font-semibold text-center text-sm rounded-lg hover:bg-gray-200 ${isSelectedMonth(i)
-                                                    ? "bg-blue-500 text-white"
-                                                    : "text-gray-700 hover:bg-blue-200"
-                                                    }`}
-                                            >
+                                                className={`transition duration-75 cursor-pointer px-1 py-3 m-1 text-center text-sm rounded-md ${isSelectedMonth(i)
+                                                    ? "bg-blue-500 text-white font-bold hover:bg-blue-700"
+                                                    : "text-gray-700 hover:bg-blue-100"
+                                                    }`}>
                                                 {format(
                                                     new Date(
                                                         datepickerHeaderDate.getFullYear(),
