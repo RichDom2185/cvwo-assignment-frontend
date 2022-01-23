@@ -1,3 +1,5 @@
+import { MouseEventHandler } from "react";
+
 const Tab = () => {
 
     return (
