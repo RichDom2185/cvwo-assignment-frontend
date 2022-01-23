@@ -83,38 +83,3 @@
 .collapsed {
   max-width: 4rem;
 }
-
-/* .separator::before,
-.separator::after {
-  content: '';
-  flex: 1;
-  border-bottom: 1px solid #eaeaea;
-} */
-
-/* .main-body > * + * {
-  margin-top: 1rem;
-} */
-
-/* .footer {
-  position: sticky;
-  top: 100vh;
-} */
-
-/* .site-header {
-  display: flex;
-  justify-content: space-between;
-}
-
-.site-header nav ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
-}
-
-.button {
-  cursor: pointer;
-  width: max-content;
-} */
