@@ -9,66 +9,68 @@ const TaskList = () => {
     //     false, true, true, false, false, true
     // ]);
 
-    const [todoList, setTodoList] = useState<TodoItem[]>([
-        // sample data
-        {
-            id: "1xcvhkxjvxcv",
-            title: "This is the test title",
-            description: "Test description",
-            completed: false,
-            tags: ["test", "abc"],
-            reminderDate: new Date(),
-        },
-        {
-            id: "2asjkbkxvhxkcv",
-            title: "This is the title",
-            description: "Test description",
-            completed: true,
-            tags: ["test", "2ef"],
-            reminderDate: new Date(),
-        },
-        {
-            id: "3kjxcv kjxv",
-            title: "This is the test title",
-            description: "Test description",
-            completed: false,
-            tags: ["test", "abc"],
-            reminderDate: new Date(),
-        },
-        {
-            id: "2aduasdiasdhascx",
-            title: "This is the test title",
-            description: "Test description",
-            completed: false,
-            tags: ["xcvxcv", "abc"],
-            reminderDate: new Date(),
-        },
-    ]);
+    // const testSeed : TodoItem[] = [
+    //     // sample data
+    //     {
+    //         id: "1xcvhkxjvxcv",
+    //         title: "This is the test title",
+    //         description: "Test description",
+    //         completed: false,
+    //         tags: ["test", "abc"],
+    //         reminderDate: new Date(),
+    //     },
+    //     {
+    //         id: "2asjkbkxvhxkcv",
+    //         title: "This is the title",
+    //         description: "Test description",
+    //         completed: true,
+    //         tags: ["test", "2ef"],
+    //         reminderDate: new Date(),
+    //     },
+    //     {
+    //         id: "3kjxcv kjxv",
+    //         title: "This is the test title",
+    //         description: "Test description",
+    //         completed: false,
+    //         tags: ["test", "abc"],
+    //         reminderDate: new Date(),
+    //     },
+    //     {
+    //         id: "2aduasdiasdhascx",
+    //         title: "This is the test title",
+    //         description: "Test description",
+    //         completed: false,
+    //         tags: ["xcvxcv", "abc"],
+    //         reminderDate: new Date(),
+    //     },
+    // ];
 
-    // function getTodoListFromLocalStorage() : TodoItem[] {
-    //     try {
-    //         const todoListString: string | null = decompressFromUTF16(window.localStorage.getItem('todoData') ?? '');
-    //         if (todoListString) {
-    //             // setTodoList(JSON.parse(todoListString) as TodoItem[]);
-    //             return JSON.parse(todoListString) as TodoItem[];
-    //         }
-    //     } catch (e) {
-    //         console.log('Error while reading todo data from local storage:', e);
-    //     }
-    //     return [];
-    // }
+    const [todoList, setTodoList] = useState<TodoItem[]>(getTodoListFromLocalStorage);
 
-    // useEffect(() => {
-    //     try {
-    //         const todoListString: string | null = decompressFromUTF16(window.localStorage.getItem('todoData') ?? '');
-    //         if (todoListString) {
-    //             setTodoList(JSON.parse(todoListString) as TodoItem[]);
-    //         }
-    //     } catch (e) {
-    //         console.log('Error while reading todo data from local storage:', e);
-    //     }
-    //     return [];
-    // }, []);
+    function getTodoListFromLocalStorage() : TodoItem[] {
+        try {
+            const todoListString: string | null = decompressFromUTF16(window.localStorage.getItem('todoData') ?? '');
+            if (todoListString) {
+                // setTodoList(JSON.parse(todoListString) as TodoItem[]);
+                return JSON.parse(todoListString) as TodoItem[];
+            }
+        } catch (e) {
+            console.log('Error while reading todo data from local storage:', e);
+        }
+        return [];
+    }
+
+    useEffect(() => {
+        try {
+            const todoListString: string | null = decompressFromUTF16(window.localStorage.getItem('todoData') ?? '');
+            if (todoListString) {
+                setTodoList(JSON.parse(todoListString) as TodoItem[]);
+                // setTodoList(testSeed);
+            }
+        } catch (e) {
+            console.log('Error while reading todo data from local storage:', e);
+        }
+    }, []);
 
     useEffect(() => {
         try {
