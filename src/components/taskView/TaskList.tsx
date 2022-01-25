@@ -47,7 +47,7 @@ const TaskList = () => {
 
     const [todoList, setTodoList] = useState<TodoItem[]>(getTodoListFromLocalStorage);
 
-    function getTodoListFromLocalStorage() : TodoItem[] {
+    function getTodoListFromLocalStorage(): TodoItem[] {
         try {
             const todoListString: string | null = decompressFromUTF16(window.localStorage.getItem('todoData') ?? '');
             if (todoListString) {
@@ -119,18 +119,23 @@ const TaskList = () => {
             : [...activeTabs, tagName]);
     };
 
+    // function hasCommonItems(arr1: string[], arr2: string[]) : boolean {
+    //     return arr1.some(item => arr2.includes(item));
+    // }
+
     return (
         <div className="bg-gray-50 rounded-2xl">
-            <Tabbar activeTabs={activeTabs} updateFilter={updateFilterFunction}/>
+            <Tabbar activeTabs={activeTabs} updateFilter={updateFilterFunction} />
             <div className="divide-y divide-gray-200 px-3">
                 {/* {tasks.map((item, index) => <Task checked={item} onChange={makeChangeFunction(index)} text="test lstesere nvbxc rfuod asdjksa c" />)} */}
-                {todoList.map((todoItem) => <Task
-                    id={todoItem.id}
-                    checked={todoItem.completed}
-                    onChange={toggleTodoItemState(todoItem.id)}
-                    title={todoItem.title}
-                    tags={todoItem.tags}
-                    updateFilter={updateFilterFunction} />)}
+                {todoList.filter(todoItem => !activeTabs.length || activeTabs.some(activeTab => todoItem.tags?.includes(activeTab)))
+                    .map((todoItem) => <Task
+                        id={todoItem.id}
+                        checked={todoItem.completed}
+                        onChange={toggleTodoItemState(todoItem.id)}
+                        title={todoItem.title}
+                        tags={todoItem.tags}
+                        updateFilter={updateFilterFunction} />)}
             </div>
         </div>
     );
