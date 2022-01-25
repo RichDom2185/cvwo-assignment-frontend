@@ -77,9 +77,10 @@ const DetailsBody = ({ todoItemId }: Props) => {
 
     const formChangeHandler: React.ChangeEventHandler = (e) => {
         const htmlElement = e.target as HTMLInputElement;
+        // console.log(htmlElement.name, htmlElement.checked);
         setTodoItem({
             ...todoItem,
-            [htmlElement.name]: htmlElement.value,
+            [htmlElement.name]: htmlElement.name === 'completed' ? htmlElement.checked : htmlElement.value,
         });
     };
 
