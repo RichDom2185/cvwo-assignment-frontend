@@ -7,6 +7,7 @@ import TagChip from "../TagChip";
 import FormLabel from "../detailsView/FormLabel";
 import Appbar from "../Appbar";
 import SaveTaskButton from "./SaveTaskButton";
+import DeleteTaskButton from "./DeleteTaskButton";
 
 import { compressToUTF16, decompressFromUTF16 } from "lz-string";
 import { useState } from "react";
@@ -88,11 +89,68 @@ const DetailsBody = ({ todoItemId }: Props) => {
         e.preventDefault();
     };
 
+    async function addTodo(todo: TodoItem, token: string) {
+        // console.log('submitting', {...todo, 'tag': todo.tags?.join(', ')});
+        console.log(todo.reminderDate!.toISOString());
+        const BACKEND_URL: string = 'https://thing-do-backend.herokuapp.com';
+        const todoString = JSON.stringify({ ...todo, 'tag': todo.tags?.join(', '), 'reminderDate': todo.reminderDate!.toISOString() });
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+            body: todoString,
+        };
+        const response = await fetch(`${BACKEND_URL}/todos`, requestOptions);
+        const data = await response.json();
+        console.log(data);
+    }
+
+    async function updateTodo(todo: TodoItem, token: string) {
+        const BACKEND_URL: string = 'https://thing-do-backend.herokuapp.com';
+        const todoString = JSON.stringify({ ...todo, 'tag': todo.tags?.join(', '), 'reminderDate': todo.reminderDate!.toISOString() });
+        const requestOptions = {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+            body: todoString,
+        };
+        const response = await fetch(`${BACKEND_URL}/todos/${todo.id}`, requestOptions);
+        const data = await response.json();
+        console.log(data);
+    }
+
+    async function deleteTodo(todo: TodoItem, token: string) {
+        const BACKEND_URL: string = 'https://thing-do-backend.herokuapp.com';
+        const requestOptions = {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+        };
+        // const response = await fetch(`${BACKEND_URL}/todos/${todo.id}`, requestOptions);
+        await fetch(`${BACKEND_URL}/todos/${todo.id}`, requestOptions);
+        // const data = await response.json();
+        window.history.back();
+    }
+
     const makeSaveCallbackFunction: (todoItem: TodoItem) => React.MouseEventHandler = (newItem: TodoItem) => {
-        return () => {
+        return async () => {
             console.log('Saving todo item');
             if (currentUserData) {
                 // TODO: online mode
+                const token = JSON.parse(currentUserData).token;
+                if (newItem.id === 'new') {
+                    await addTodo(newItem, token);
+                } else {
+                    await updateTodo(newItem, token);
+                }
+                console.log('Saved todo item');
+                window.history.back();
                 return;
             }
 
@@ -110,6 +168,39 @@ const DetailsBody = ({ todoItemId }: Props) => {
             window.history.back();
         }
     };
+
+    const makeDeleteCallbackFunction: (todoItem: TodoItem) => React.MouseEventHandler = (newItem: TodoItem) => {
+        return async () => {
+            console.log('Deleting todo item');
+            if (currentUserData) {
+                const token = JSON.parse(currentUserData).token;
+                if (newItem.id === 'new') {
+                    return;
+                } else {
+                    await deleteTodo(newItem, token);
+                }
+                return;
+            }
+
+            try {
+                const todoListString: string = decompressFromUTF16(window.localStorage.getItem('todoData')!)!;
+                const todoList: TodoItem[] = JSON.parse(todoListString) as TodoItem[];
+                const newTodoList: string = JSON.stringify(todoList.filter(oldItem => oldItem.id !== newItem.id));
+                const serializedTodoList = compressToUTF16(newTodoList);
+                window.localStorage.setItem('todoData', serializedTodoList);
+            } catch (e) {
+                console.log('Error while saving file to database:', e);
+            }
+            window.history.back();
+        }
+    };
+
+    const updateDate: (selectedDate: Date) => void = (selectedDate) => {
+        setTodoItem({
+            ...todoItem,
+            reminderDate: selectedDate,
+        });
+    }
 
     return <div className="h-screen flex-grow flex flex-col">
         <Appbar />
@@ -147,7 +238,7 @@ const DetailsBody = ({ todoItemId }: Props) => {
                         Due:
                     </FormLabel>
                     <div className="md:w-4/5 space-y-3">
-                        <DatePicker />
+                        <DatePicker initialDate={todoItem.reminderDate} callback={updateDate} />
                     </div>
                 </div>
                 <div className="md:flex md:items-center mb-6">
@@ -163,8 +254,9 @@ const DetailsBody = ({ todoItemId }: Props) => {
                     </div>
                 </div>
             </form>
-            <div className="flex justify-center">
+            <div className="flex justify-center space-x-6">
                 <SaveTaskButton callback={makeSaveCallbackFunction(todoItem)} />
+                <DeleteTaskButton callback={makeDeleteCallbackFunction(todoItem)} />
             </div>
         </div>
         <Footer />

@@ -9,7 +9,11 @@ const StatusIndicator = () => {
             ? 'Connected to server. Your tasks will be synced across your devices.'
             : 'Not connected. Either sign in or ensure you have a working internet connection. Your tasks will remain available offline.'}>
         {currentUserData ? <MdCloudQueue size={22} /> : <MdOutlineCloudOff size={22} />}
-        <span>{currentUserData ? 'Connected' : 'Offline Mode'}</span>
+        <span>
+            {currentUserData
+                ? 'Connected' // TODO: handle authentication failure
+                : 'Offline Mode'}
+        </span>
     </div>;
 };
 

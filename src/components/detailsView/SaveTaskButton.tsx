@@ -1,7 +1,7 @@
-import {BiSave} from 'react-icons/bi';
+import { BiSave } from 'react-icons/bi';
 
 interface Props {
-    callback : React.MouseEventHandler;
+    callback: React.MouseEventHandler;
 };
 
 const SaveTaskButton = ({ callback }: Props) => {

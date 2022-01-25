@@ -4,6 +4,19 @@ import Task from "./Task";
 import { TodoItem } from "../../App";
 import { compressToUTF16, decompressFromUTF16 } from "lz-string";
 
+type ResponseData = {
+    id: string;
+    title: string;
+    description: string;
+    completed: boolean;
+    tag: string;
+    date: string;
+    time: string;
+    user_id: string;
+    created_at: string;
+    updated_at: string;
+};
+
 const TaskList = () => {
     // const [tasks, setTasks] = useState([
     //     false, true, true, false, false, true
@@ -47,6 +60,8 @@ const TaskList = () => {
 
     const [todoList, setTodoList] = useState<TodoItem[]>(getTodoListFromLocalStorage);
 
+    const currentUserData: string | null = decompressFromUTF16(window.localStorage.getItem("user") ?? '');
+
     function getTodoListFromLocalStorage(): TodoItem[] {
         try {
             const todoListString: string | null = decompressFromUTF16(window.localStorage.getItem('todoData') ?? '');
@@ -60,7 +75,43 @@ const TaskList = () => {
         return [];
     }
 
+    async function fetchTasks(token: string) {
+        const BACKEND_URL: string = 'https://thing-do-backend.herokuapp.com';
+        const requestOptions = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+        };
+        const response = await fetch(`${BACKEND_URL}/todos`, requestOptions);
+        const data = await response.json();
+        console.log(data);
+        if (!data.error) {
+            const asTodoList: TodoItem[] = (data as ResponseData[]).map(
+                (item: ResponseData) => {
+                    const newItem: TodoItem = {
+                        id: item.id,
+                        title: item.title,
+                        description: item.description,
+                        completed: item.completed,
+                        tags: item.tag ? item.tag.split(',') : [],
+                        reminderDate: new Date(item.date ?? ''),
+                    };
+                    return newItem;
+                });
+            setTodoList(asTodoList);
+        } else {
+            console.log('Error:', data.error);
+        }
+    }
+
+    // Get Todos
     useEffect(() => {
+        if (currentUserData) {
+            const currentUser = JSON.parse(currentUserData);
+            fetchTasks(currentUser.token);
+        }
         try {
             const todoListString: string | null = decompressFromUTF16(window.localStorage.getItem('todoData') ?? '');
             if (todoListString) {
@@ -70,8 +121,9 @@ const TaskList = () => {
         } catch (e) {
             console.log('Error while reading todo data from local storage:', e);
         }
-    }, []);
+    }, [currentUserData]);
 
+    // Set Todos
     useEffect(() => {
         try {
             const serializedTodoList: string = compressToUTF16(JSON.stringify(todoList));
@@ -131,13 +183,22 @@ const TaskList = () => {
                 {todoList.filter(todoItem => !activeTabs.length || activeTabs.some(activeTab => todoItem.tags?.includes(activeTab)))
                     // .sort((a, b) => a.completed === b.completed ? 0 : a.completed ? -1 : 1)
                     .sort((a, b) => a.title.localeCompare(b.title))
-                    .map((todoItem) => <Task
+                    .map((todoItem, index) => <Task
+                        key={index}
                         id={todoItem.id}
                         checked={todoItem.completed}
                         onChange={toggleTodoItemState(todoItem.id)}
                         title={todoItem.title}
                         tags={todoItem.tags}
                         updateFilter={updateFilterFunction} />)}
+                {!(todoList.filter(todoItem => !activeTabs.length || activeTabs.some(activeTab => todoItem.tags?.includes(activeTab)))
+                    .length) && (
+                        <div className="flex gap-2 py-2">
+                            <div className="transition flex-grow flex flex-wrap items-center gap-4 justify-between px-4 py-3 rounded-2xl cursor-pointer">
+                                <p className="flex-shrink text-gray-500 m-auto italic">No tasks found</p>
+                            </div>
+                        </div>
+                    )}
             </div>
         </div>
     );

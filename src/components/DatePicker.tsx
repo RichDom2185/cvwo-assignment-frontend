@@ -14,14 +14,26 @@ import { HiOutlineCalendar, HiOutlineChevronLeft, HiOutlineChevronRight } from '
 
 type DatepickerType = "date" | "month" | "year";
 
-export default function DatePicker() {
+interface Props {
+    initialDate?: Date,
+    callback: (selectedDate : Date) => void,
+};
+
+export default function DatePicker({ initialDate, callback }: Props) {
     const DAYS = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
     const [dayCount, setDayCount] = useState<Array<number>>([]);
     const [blankDays, setBlankDays] = useState<Array<number>>([]);
     const [showDatepicker, setShowDatepicker] = useState(false);
     const [datepickerHeaderDate, setDatepickerHeaderDate] = useState(new Date());
-    const [selectedDate, setSelectedDate] = useState(new Date());
+    // const [selectedDate, setSelectedDate] = useState(new Date());
+    const [selectedDate, setSelectedDate] = useState(initialDate ?? new Date());
     const [type, setType] = useState<DatepickerType>("date");
+
+    useEffect(() => {
+        console.log(selectedDate);
+        callback(selectedDate);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [selectedDate]);
 
     const decrement = () => {
         switch (type) {
