@@ -125,7 +125,9 @@ const DetailsBody = ({ todoItemId }: Props) => {
                         Completed:
                     </FormLabel>
                     <div className="md:w-4/5 space-y-3">
-                        <input type="checkbox" name="completed" id="completed" />
+                        {todoItem.completed
+                            ? <input type="checkbox" name="completed" id="completed" onChange={formChangeHandler} defaultChecked />
+                            : <input type="checkbox" name="completed" id="completed" onChange={formChangeHandler} />}
                     </div>
                 </div>
                 <div className="md:flex md:items-center mb-6">

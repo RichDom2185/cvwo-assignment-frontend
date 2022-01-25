@@ -1,8 +1,6 @@
-import { ChangeEventHandler } from "react";
-
 export interface Props {
     checked: boolean;
-    onChange: ChangeEventHandler;
+    onChange: React.ChangeEventHandler;
 };
 
 const TaskCheckbox = ({ checked, onChange }: Props) => {

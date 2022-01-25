@@ -129,6 +129,8 @@ const TaskList = () => {
             <div className="divide-y divide-gray-200 px-3">
                 {/* {tasks.map((item, index) => <Task checked={item} onChange={makeChangeFunction(index)} text="test lstesere nvbxc rfuod asdjksa c" />)} */}
                 {todoList.filter(todoItem => !activeTabs.length || activeTabs.some(activeTab => todoItem.tags?.includes(activeTab)))
+                    // .sort((a, b) => a.completed === b.completed ? 0 : a.completed ? -1 : 1)
+                    .sort((a, b) => a.title.localeCompare(b.title))
                     .map((todoItem) => <Task
                         id={todoItem.id}
                         checked={todoItem.completed}
