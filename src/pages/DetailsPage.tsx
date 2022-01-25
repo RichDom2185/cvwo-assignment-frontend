@@ -8,18 +8,13 @@ import TagChip from "../components/TagChip";
 import FormLabel from "../components/detailsView/FormLabel";
 import Appbar from "../components/Appbar";
 import { useState } from "react";
+import { useParams } from "react-router";
 
-export type TodoItem = {
-    id: string,
-    title: string,
-    description?: string,
-    completed: boolean,
-    tags?: string[],
-    reminderDate?: Date,
-    reminderTime?: Date,
-};
+import { TodoItem } from "../App";
 
 const DetailsPage = () => {
+    const params = useParams();
+    
     const [todoItem, setTodoItem] = useState<TodoItem>({
         id: '1',
         title: 'This is the test title',

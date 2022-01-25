@@ -1,15 +1,22 @@
 import Tab from "./Tab";
 
-const Tabbar = () => {
+interface Props {
+    activeTabs: string[];
+    updateFilter: (tagName : string) => React.MouseEventHandler;
+}
+
+const Tabbar = ({ activeTabs, updateFilter }: Props) => {
     return (
-        <div className="flex items-center gap-x-3 bg-gray-200 px-3 rounded-t-2xl">
-            <span className="font-outfit font-semibold">Viewing Tags:</span>
-            <ul id="tags" className="flex space-x-2 my-2">
-                <Tab />
-                <Tab />
-                <Tab />
-                <Tab />
-                <Tab />
+        <div className="flex items-center gap-x-3 bg-blue-200 shadow-sm shadow-blue-300 px-3 rounded-t-2xl">
+            <span className="font-outfit">Viewing:</span>
+            <ul id="tags" className="flex items-center space-x-2 my-2">
+                {activeTabs.map((tab, index) => (<Tab key={index} tabName={tab} callback={updateFilter(tab)}/>))}
+                {!activeTabs.length && (
+                    <>
+                        <Tab tabName="All" disabled={true} />
+                        <span className="text-sm font-light font-outfit italic text-blue-500">Click on any tag below to toggle filters</span>
+                    </>
+                )}
             </ul>
         </div>
     );

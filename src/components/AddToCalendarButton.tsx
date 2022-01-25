@@ -1,5 +1,5 @@
 import { FaRegCalendarPlus } from 'react-icons/fa';
-import { TodoItem } from '../pages/DetailsPage';
+import { TodoItem } from '../App';
 
 interface Props {
     item: TodoItem;
