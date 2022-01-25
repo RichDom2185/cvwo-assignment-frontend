@@ -10,7 +10,7 @@ const Tabbar = ({ activeTabs, updateFilter }: Props) => {
         <div className="flex items-center gap-x-3 bg-blue-200 shadow-sm shadow-blue-300 px-3 rounded-t-2xl">
             <span className="font-outfit">Viewing:</span>
             <ul id="tags" className="flex items-center space-x-2 my-2">
-                {activeTabs.map((tab, index) => (<Tab key={index} tabName={tab} callback={updateFilter(tab)}/>))}
+                {activeTabs.map((tab, index) => (<Tab key={index} tabName={tab} isColored={true} callback={updateFilter(tab)}/>))}
                 {!activeTabs.length && (
                     <>
                         <Tab tabName="All" disabled={true} />
