@@ -9,20 +9,39 @@ import FormLabel from "../components/detailsView/FormLabel";
 import Appbar from "../components/Appbar";
 import { useState } from "react";
 import { useParams } from "react-router";
+import { decompressFromUTF16 } from "lz-string";
 
 import { TodoItem } from "../App";
 
 const DetailsPage = () => {
     const params = useParams();
+
+    const currentUserData: string | null = decompressFromUTF16(window.localStorage.getItem("user") ?? '');
     
-    const [todoItem, setTodoItem] = useState<TodoItem>({
-        id: '1',
-        title: 'This is the test title',
-        description: 'Test description',
-        completed: false,
-        tags: ['test', 'abc'],
-        reminderDate: new Date(),
-    });
+    // const [todoItem, setTodoItem] = useState<TodoItem>({
+    //     id: '1',
+    //     title: 'This is the test title',
+    //     description: 'Test description',
+    //     completed: false,
+    //     tags: ['test', 'abc'],
+    //     reminderDate: new Date(),
+    // });
+
+    const [todoItem, setTodoItem] = useState<TodoItem>(generateTodoBoilerplate());
+
+    function generateTodoBoilerplate() : TodoItem {
+        if (currentUserData) {
+            // TODO: handle online
+        }
+        return {
+            id: params.id!,
+            title: '',
+            description: '',
+            completed: false,
+            tags: [],
+            reminderDate: new Date(),
+        }
+    }
 
     const [addTag, setAddTag] = useState<string>('');
 
