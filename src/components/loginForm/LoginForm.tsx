@@ -1,11 +1,11 @@
+import { compressToUTF16 } from "lz-string";
 import { ChangeEventHandler, FormEventHandler, useState } from "react";
 import { FaApple, FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { useNavigate } from "react-router";
+import { BACKEND_URL } from "../../utils/constants";
 import FormTextInputElement from "./FormTextInputElement";
 import LogoButton from "./LogoButton";
-
-import { compressToUTF16 } from "lz-string";
 
 interface Props {
   type: string;
@@ -48,7 +48,6 @@ const LoginForm = ({ type }: Props) => {
 
   async function fetchUser() {
     // console.log(JSON.stringify(form));
-    const BACKEND_URL: string = "https://thing-do-backend.herokuapp.com";
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },

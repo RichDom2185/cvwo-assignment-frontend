@@ -1,6 +1,7 @@
 import { compressToUTF16, decompressFromUTF16 } from "lz-string";
 import { useEffect, useState } from "react";
 import { TodoItem } from "../../App";
+import { BACKEND_URL } from "../../utils/constants";
 import Tabbar from "./Tabbar";
 import Task from "./Task";
 
@@ -82,7 +83,6 @@ const TaskList = () => {
   }
 
   async function fetchTasks(token: string) {
-    const BACKEND_URL: string = "https://thing-do-backend.herokuapp.com";
     const requestOptions = {
       method: "GET",
       headers: {

@@ -1,5 +1,9 @@
 // chips adapted from https://tailwind-elements.com/docs/standard/components/chips/
 // form adapted from https://v1.tailwindcss.com/components/forms
+import { compressToUTF16, decompressFromUTF16 } from "lz-string";
+import { useState } from "react";
+import { TodoItem } from "../../App";
+import { BACKEND_URL } from "../../utils/constants";
 import AddToCalendarButton from "../AddToCalendarButton";
 import Appbar from "../Appbar";
 import DatePicker from "../DatePicker";
@@ -8,11 +12,6 @@ import TagChip from "../TagChip";
 import FormLabel from "../detailsView/FormLabel";
 import DeleteTaskButton from "./DeleteTaskButton";
 import SaveTaskButton from "./SaveTaskButton";
-
-import { compressToUTF16, decompressFromUTF16 } from "lz-string";
-import { useState } from "react";
-
-import { TodoItem } from "../../App";
 
 interface Props {
   todoItemId: string;
@@ -105,7 +104,6 @@ const DetailsBody = ({ todoItemId }: Props) => {
   async function addTodo(todo: TodoItem, token: string) {
     // console.log('submitting', {...todo, 'tag': todo.tags?.join(', ')});
     console.log(todo.reminderDate!.toISOString());
-    const BACKEND_URL: string = "https://thing-do-backend.herokuapp.com";
     const todoString = JSON.stringify({
       ...todo,
       tag: todo.tags?.join(", "),
@@ -125,7 +123,6 @@ const DetailsBody = ({ todoItemId }: Props) => {
   }
 
   async function updateTodo(todo: TodoItem, token: string) {
-    const BACKEND_URL: string = "https://thing-do-backend.herokuapp.com";
     const todoString = JSON.stringify({
       ...todo,
       tag: todo.tags?.join(", "),
@@ -148,7 +145,6 @@ const DetailsBody = ({ todoItemId }: Props) => {
   }
 
   async function deleteTodo(todo: TodoItem, token: string) {
-    const BACKEND_URL: string = "https://thing-do-backend.herokuapp.com";
     const requestOptions = {
       method: "DELETE",
       headers: {
