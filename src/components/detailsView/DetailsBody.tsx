@@ -129,7 +129,7 @@ const DetailsBody = ({ todoItemId }: Props) => {
     const todoString = JSON.stringify({
       ...todo,
       tag: todo.tags?.join(", "),
-      reminderDate: todo.reminderDate!.toISOString(),
+      date: todo.reminderDate!.toISOString(),
     });
     const requestOptions = {
       method: "PUT",
@@ -309,8 +309,7 @@ const DetailsBody = ({ todoItemId }: Props) => {
             <div className="md:w-4/5 space-y-3">
               <DatePicker
                 initialDate={todoItem.reminderDate}
-                callback={() => {}}
-                // callback={updateDate}
+                callback={updateDate}
               />
             </div>
           </div>
