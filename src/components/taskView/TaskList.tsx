@@ -1,6 +1,6 @@
 import { compressToUTF16, decompressFromUTF16 } from "lz-string";
 import { useEffect, useState } from "react";
-import { TodoItem } from "../../App";
+import { TodoItem } from "../../types/todo";
 import { BACKEND_URL } from "../../utils/constants";
 import Tabbar from "./Tabbar";
 import Task from "./Task";

@@ -2,7 +2,7 @@
 // form adapted from https://v1.tailwindcss.com/components/forms
 import { compressToUTF16, decompressFromUTF16 } from "lz-string";
 import { useState } from "react";
-import { TodoItem } from "../../App";
+import { TodoItem } from "../../types/todo";
 import { BACKEND_URL } from "../../utils/constants";
 import AddToCalendarButton from "../AddToCalendarButton";
 import Appbar from "../Appbar";
@@ -233,6 +233,8 @@ const DetailsBody = ({ todoItemId }: Props) => {
     });
   };
 
+  console.log(todoItem.reminderDate);
+
   return (
     <div className="h-screen flex-grow flex flex-col">
       <Appbar />
@@ -304,7 +306,8 @@ const DetailsBody = ({ todoItemId }: Props) => {
             <div className="md:w-4/5 space-y-3">
               <DatePicker
                 initialDate={todoItem.reminderDate}
-                callback={updateDate}
+                callback={() => {}}
+                // callback={updateDate}
               />
             </div>
           </div>
