@@ -4,6 +4,7 @@ import { compressToUTF16, decompressFromUTF16 } from "lz-string";
 import { useState } from "react";
 import { TodoItem } from "../../types/todo";
 import { BACKEND_URL } from "../../utils/constants";
+import { createTodoFromJson } from "../../utils/todo";
 import AddToCalendarButton from "../AddToCalendarButton";
 import Appbar from "../Appbar";
 import DatePicker from "../DatePicker";
@@ -43,10 +44,12 @@ const DetailsBody = ({ todoItemId }: Props) => {
       const todoListString: string = decompressFromUTF16(
         window.localStorage.getItem("todoData")!
       )!;
-      const todoList: TodoItem[] = JSON.parse(todoListString) as TodoItem[];
+      const todoList: Record<string, any>[] = JSON.parse(todoListString);
+      // TODO: Hacky fix for dates while awaiting code refactor
       const todoItem: TodoItem =
-        todoList.find((searchItem) => searchItem.id === todoItemId) ??
-        blankTodoItem;
+        todoList
+          .map((todoObject) => createTodoFromJson(JSON.stringify(todoObject)))
+          .find((searchItem) => searchItem.id === todoItemId) ?? blankTodoItem;
       return todoItem;
     } catch (e) {
       console.log("Error loading file from database:", e);
