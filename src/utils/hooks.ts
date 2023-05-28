@@ -12,10 +12,8 @@ type MakeSetterTypes<T extends Record<string, any>> = {
 
 export const useLocalStorage = <T extends keyof LocalStorage>(
   key: T
-): Pick<
-  MakeGetterTypes<LocalStorage> & MakeSetterTypes<LocalStorage>,
-  `getStorage${Capitalize<T>}` | `setStorage${Capitalize<T>}`
-> => {
+): MakeGetterTypes<Pick<LocalStorage, T>> &
+  MakeSetterTypes<Pick<LocalStorage, T>> => {
   const camelCaseKey = key.replace(/^\w/, (c) =>
     c.toUpperCase()
   ) as Capitalize<T>;
