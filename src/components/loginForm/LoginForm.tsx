@@ -4,6 +4,7 @@ import { FaApple, FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { useNavigate } from "react-router";
 import { BACKEND_URL } from "../../utils/constants";
+import { useLocalStorage } from "../../utils/hooks";
 import FormTextInputElement from "./FormTextInputElement";
 import LogoButton from "./LogoButton";
 
@@ -31,6 +32,7 @@ const LoginForm = ({ type }: Props) => {
     password: "",
   });
 
+  const { setStorageToken } = useLocalStorage("token");
   const handleChange: ChangeEventHandler = (e) => {
     const element = e.target as HTMLInputElement;
     setForm({
@@ -66,10 +68,12 @@ const LoginForm = ({ type }: Props) => {
         name: data.user.name,
         token: data.token,
       };
+      // TODO: use useLocalStorage hook
       window.localStorage.setItem(
         "user",
         compressToUTF16(JSON.stringify(user))
       );
+      setStorageToken(data.token);
 
       // eslint-disable-next-line react-hooks/rules-of-hooks
       navigate("/");
