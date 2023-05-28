@@ -52,12 +52,17 @@ const DetailsBody = ({ todoItemId }: Props) => {
     const htmlElement = e.target as HTMLInputElement;
     if (e.key === "Enter") {
       e.preventDefault();
-      if (htmlElement.value.trim() !== "") {
-        setAddTag("");
-        setTodo({
-          ...todo,
-          tags: [...(todo.tags ?? []), htmlElement.value.trim()],
-        });
+      const trimmedValue = htmlElement.value.trim();
+      if (trimmedValue !== "") {
+        if (!todo.tags?.includes(trimmedValue)) {
+          setAddTag("");
+          setTodo({
+            ...todo,
+            tags: [...(todo.tags ?? []), trimmedValue],
+          });
+        } else {
+          alert("Tag already exists");
+        }
       }
     }
   };
@@ -90,12 +95,10 @@ const DetailsBody = ({ todoItemId }: Props) => {
   };
 
   async function addTodo(todo: TodoItem, token: string) {
-    // console.log('submitting', {...todo, 'tag': todo.tags?.join(', ')});
-    console.log(todo.reminderDate!.toISOString());
     const todoString = JSON.stringify({
       ...todo,
       tag: todo.tags?.join(", "),
-      reminderDate: todo.reminderDate!.toISOString(),
+      reminderDate: todo.reminderDate?.toISOString(),
     });
     const requestOptions = {
       method: "POST",
@@ -105,16 +108,14 @@ const DetailsBody = ({ todoItemId }: Props) => {
       },
       body: todoString,
     };
-    const response = await fetch(`${BACKEND_URL}/todos`, requestOptions);
-    const data = await response.json();
-    console.log(data);
+    await fetch(`${BACKEND_URL}/todos`, requestOptions);
   }
 
   async function updateTodo(todo: TodoItem, token: string) {
     const todoString = JSON.stringify({
       ...todo,
       tag: todo.tags?.join(", "),
-      date: todo.reminderDate!.toISOString(),
+      date: todo.reminderDate?.toISOString(),
     });
     const requestOptions = {
       method: "PUT",
@@ -124,12 +125,7 @@ const DetailsBody = ({ todoItemId }: Props) => {
       },
       body: todoString,
     };
-    const response = await fetch(
-      `${BACKEND_URL}/todos/${todo.id}`,
-      requestOptions
-    );
-    const data = await response.json();
-    console.log(data);
+    await fetch(`${BACKEND_URL}/todos/${todo.id}`, requestOptions);
   }
 
   async function deleteTodo(todo: TodoItem, token: string) {
@@ -140,17 +136,13 @@ const DetailsBody = ({ todoItemId }: Props) => {
         Authorization: `Bearer ${token}`,
       },
     };
-    // const response = await fetch(`${BACKEND_URL}/todos/${todo.id}`, requestOptions);
     await fetch(`${BACKEND_URL}/todos/${todo.id}`, requestOptions);
-    // const data = await response.json();
-    window.history.back();
   }
 
   const makeSaveCallbackFunction: (
     todoItem: TodoItem
   ) => React.MouseEventHandler = (newItem: TodoItem) => {
     return async () => {
-      console.log("Saving todo item");
       if (token) {
         // TODO: online mode
         if (newItem.id === "new") {
@@ -178,13 +170,12 @@ const DetailsBody = ({ todoItemId }: Props) => {
   ) => React.MouseEventHandler = (newItem: TodoItem) => {
     return async () => {
       console.log("Deleting todo item");
-      if (token) {
-        if (newItem.id === "new") {
-          return;
-        } else {
-          await deleteTodo(newItem, token);
-        }
+      if (newItem.id === "new") {
+        window.history.back();
         return;
+      }
+      if (token) {
+        await deleteTodo(newItem, token);
       }
 
       const oldList = getStorageTodoList() ?? [];
