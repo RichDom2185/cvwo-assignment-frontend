@@ -1,8 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { TodoApiItem, TodoItem } from "../../types/todo";
-import { BACKEND_URL } from "../../utils/constants";
+import { fetchTasks } from "../../api/todo";
+import { TodoItem } from "../../types/todo";
 import { useLocalStorage } from "../../utils/hooks";
-import { creatTodoFromApiParams } from "../../utils/todo";
 import Tabbar from "./Tabbar";
 import Task from "./Task";
 
@@ -21,33 +20,10 @@ const TaskList = () => {
     [setStorageTodoList]
   );
 
-  async function fetchTasks(token: string | undefined) {
-    if (!token) {
-      return [];
-    }
-    const requestOptions = {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    };
-    const response = await fetch(`${BACKEND_URL}/todos`, requestOptions);
-    const data = (await response.json()) as TodoApiItem[];
-    console.log(data);
-    // TODO: Handle errors pending refactor
-    const tasks = data.map(creatTodoFromApiParams);
-
-    // TODO: Set this outside (no side effects)
-    handleSetTodoList(tasks);
-    return tasks;
-  }
-
   // Get Todos on mount
   useEffect(() => {
-    fetchTasks(token);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [token]);
+    fetchTasks(token).then((tasks) => handleSetTodoList(tasks));
+  }, [handleSetTodoList, token]);
 
   function toggleTodoItemState(uuid: string) {
     return (event: React.ChangeEvent<HTMLInputElement>) => {
