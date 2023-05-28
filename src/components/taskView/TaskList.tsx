@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useState } from "react";
-import { TodoApiItem } from "../../types/todo";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { TodoApiItem, TodoItem } from "../../types/todo";
 import { BACKEND_URL } from "../../utils/constants";
 import { useLocalStorage } from "../../utils/hooks";
 import { creatTodoFromApiParams } from "../../utils/todo";
@@ -12,11 +12,14 @@ const TaskList = () => {
 
   const { getStorageTodoList, setStorageTodoList } =
     useLocalStorage("todoList");
-  const todoList = useMemo(
-    () => getStorageTodoList() ?? [],
-    [getStorageTodoList]
+  const [todoList, setTodoList] = useState(getStorageTodoList() ?? []);
+  const handleSetTodoList = useCallback(
+    (newList: TodoItem[]) => {
+      setTodoList(newList);
+      setStorageTodoList(newList);
+    },
+    [setStorageTodoList]
   );
-  const [displayedList, setDisplayedList] = useState(todoList);
 
   async function fetchTasks(token: string | undefined) {
     if (!token) {
@@ -36,21 +39,15 @@ const TaskList = () => {
     const tasks = data.map(creatTodoFromApiParams);
 
     // TODO: Set this outside (no side effects)
-    setStorageTodoList(tasks);
-    setDisplayedList(tasks);
+    handleSetTodoList(tasks);
     return tasks;
   }
 
-  // Get Todos
+  // Get Todos on mount
   useEffect(() => {
     fetchTasks(token);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
-
-  // Set Todos
-  // useEffect(() => {
-  //   setStorageTodoList(todoList);
-  // }, [setStorageTodoList, todoList]);
 
   function toggleTodoItemState(uuid: string) {
     return (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,7 +57,7 @@ const TaskList = () => {
           : todoItem
       );
       // TODO: Fire API call
-      setStorageTodoList(newList);
+      handleSetTodoList(newList);
     };
   }
 
@@ -74,14 +71,13 @@ const TaskList = () => {
           : [...activeTabs, tagName]
       );
     };
-  useEffect(() => {
-    setDisplayedList(
-      todoList.filter(
-        (todoItem) =>
-          // Show all tasks if no tags are selected
-          !activeTabs.length ||
-          activeTabs.some((activeTab) => todoItem.tags?.includes(activeTab))
-      )
+
+  const displayedList = useMemo(() => {
+    return todoList.filter(
+      (todoItem) =>
+        // Show all tasks if no tags are selected
+        !activeTabs.length ||
+        activeTabs.some((activeTab) => todoItem.tags?.includes(activeTab))
     );
   }, [activeTabs, todoList]);
 
