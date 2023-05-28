@@ -3,6 +3,7 @@ import { ChangeEventHandler, FormEventHandler, useState } from "react";
 import { FaApple, FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { useNavigate } from "react-router";
+import { UserApiData, UserData } from "../../types/user";
 import { BACKEND_URL } from "../../utils/constants";
 import { useLocalStorage } from "../../utils/hooks";
 import FormTextInputElement from "./FormTextInputElement";
@@ -12,19 +13,6 @@ interface Props {
   type: string;
 }
 
-type UserData = {
-  user: {
-    id: string;
-    email: string;
-    name: string;
-    // password_digest: string;
-    // created_at: string;
-    // updated_at: string;
-  };
-  token: string;
-  error: string;
-};
-
 const LoginForm = ({ type }: Props) => {
   const [form, setForm] = useState({
     name: "",
@@ -33,6 +21,8 @@ const LoginForm = ({ type }: Props) => {
   });
 
   const { setStorageToken } = useLocalStorage("token");
+  const { setStorageCurrentUser } = useLocalStorage("currentUser");
+
   const handleChange: ChangeEventHandler = (e) => {
     const element = e.target as HTMLInputElement;
     setForm({
@@ -59,30 +49,24 @@ const LoginForm = ({ type }: Props) => {
       `${BACKEND_URL}/${type === "login" ? "login" : "users"}`,
       requestOptions
     );
-    const data: UserData = await response.json();
-    console.log(data);
-    if (data.user) {
-      const user = {
-        id: data.user.id,
-        email: data.user.email,
-        name: data.user.name,
-        token: data.token,
-      };
-      // TODO: use useLocalStorage hook
-      window.localStorage.setItem(
-        "user",
-        compressToUTF16(JSON.stringify(user))
-      );
-      setStorageToken(data.token);
+    const data: UserApiData = await response.json();
+    const loggedInUser: UserData = {
+      id: data.user.id,
+      name: data.user.name,
+      email: data.user.email,
+    };
+    // TODO: use useLocalStorage hook
+    window.localStorage.setItem(
+      "user",
+      compressToUTF16(JSON.stringify({ ...loggedInUser, token: data.token }))
+    );
+    setStorageCurrentUser(loggedInUser);
+    setStorageToken(data.token);
 
-      // eslint-disable-next-line react-hooks/rules-of-hooks
-      navigate("/");
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    navigate("/");
 
-      // window.localStorage.setItem('token', data.token);
-      // window.location.href = "/";
-    } else {
-      console.log("Error:", data.error);
-    }
+    // TODO: Handle errors pending refactor
   }
 
   const handleSocialLogin: React.MouseEventHandler<HTMLButtonElement> = () => {
