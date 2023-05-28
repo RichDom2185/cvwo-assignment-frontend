@@ -1,23 +1,22 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { useLocalStorage } from "../utils/hooks";
 import UserModalButton from "./UserModalButton";
 
-const UserAvatar = () => {
+const UserAvatar: React.FC = () => {
   const { getStorageCurrentUser } = useLocalStorage("currentUser");
   const currentUser = getStorageCurrentUser();
 
-  const [nameOfUser, setNameOfUser] = useState<String>("Anonymous User");
-  const [emailOfUser, setEmailOfUser] = useState<String>("test@gmail.com");
-
-  const [modalVisibility, setModalVisibility] = useState<boolean>(false);
+  const [userName, setUserName] = useState("Anonymous User");
+  const [userEmail, setUserEmail] = useState("");
+  const [modalVisibility, setModalVisibility] = useState(false);
   const toggleModalVisibility = () =>
     setModalVisibility((modalVisibility) => !modalVisibility);
 
   useEffect(() => {
     if (currentUser) {
-      setNameOfUser(currentUser.name);
-      setEmailOfUser(currentUser.email);
+      setUserName(currentUser.name);
+      setUserEmail(currentUser.email);
     }
   }, [currentUser]);
 
@@ -35,7 +34,7 @@ const UserAvatar = () => {
         className="transition select-none flex items-center justify-center gap-x-2 hover:text-gray-700 hover:bg-gray-100 px-3 py-2 hover:shadow-md rounded-lg cursor-pointer"
         onClick={toggleModalVisibility}
       >
-        <span>{nameOfUser}</span>
+        <span>{userName}</span>
         <FaUserCircle className="text-2xl" />
       </div>
       {modalVisibility && (
@@ -45,8 +44,8 @@ const UserAvatar = () => {
               <FaUserCircle className="text-6xl" />
             </div>
             <div>
-              <span className="block font-pt font-semibold">{nameOfUser}</span>
-              <span className="block text-sm font-pt">{emailOfUser}</span>
+              <span className="block font-pt font-semibold">{userName}</span>
+              <span className="block text-sm font-pt">{userEmail}</span>
             </div>
           </div>
           <div className="flex justify-between pt-2">
