@@ -1,4 +1,3 @@
-import { compressToUTF16 } from "lz-string";
 import { ChangeEventHandler, FormEventHandler, useState } from "react";
 import { FaApple, FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
@@ -55,11 +54,6 @@ const LoginForm = ({ type }: Props) => {
       name: data.user.name,
       email: data.user.email,
     };
-    // TODO: use useLocalStorage hook
-    window.localStorage.setItem(
-      "user",
-      compressToUTF16(JSON.stringify({ ...loggedInUser, token: data.token }))
-    );
     setStorageCurrentUser(loggedInUser);
     setStorageToken(data.token);
 

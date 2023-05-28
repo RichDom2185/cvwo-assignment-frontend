@@ -2,6 +2,7 @@ import { compressToUTF16, decompressFromUTF16 } from "lz-string";
 import { useEffect, useState } from "react";
 import { TodoItem } from "../../types/todo";
 import { BACKEND_URL } from "../../utils/constants";
+import { useLocalStorage } from "../../utils/hooks";
 import Tabbar from "./Tabbar";
 import Task from "./Task";
 
@@ -59,12 +60,11 @@ const TaskList = () => {
   //     },
   // ];
 
+  const { getStorageToken } = useLocalStorage("token");
+  const token = getStorageToken();
+
   const [todoList, setTodoList] = useState<TodoItem[]>(
     getTodoListFromLocalStorage
-  );
-
-  const currentUserData: string | null = decompressFromUTF16(
-    window.localStorage.getItem("user") ?? ""
   );
 
   function getTodoListFromLocalStorage(): TodoItem[] {
@@ -115,9 +115,8 @@ const TaskList = () => {
 
   // Get Todos
   useEffect(() => {
-    if (currentUserData) {
-      const currentUser = JSON.parse(currentUserData);
-      fetchTasks(currentUser.token);
+    if (token) {
+      fetchTasks(token);
     }
     try {
       const todoListString: string | null = decompressFromUTF16(
@@ -130,7 +129,7 @@ const TaskList = () => {
     } catch (e) {
       console.log("Error while reading todo data from local storage:", e);
     }
-  }, [currentUserData]);
+  }, [token]);
 
   // Set Todos
   useEffect(() => {

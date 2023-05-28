@@ -4,6 +4,7 @@ import { compressToUTF16, decompressFromUTF16 } from "lz-string";
 import { useState } from "react";
 import { TodoItem } from "../../types/todo";
 import { BACKEND_URL } from "../../utils/constants";
+import { useLocalStorage } from "../../utils/hooks";
 import { createTodoFromJson } from "../../utils/todo";
 import AddToCalendarButton from "../AddToCalendarButton";
 import Appbar from "../Appbar";
@@ -19,9 +20,8 @@ interface Props {
 }
 
 const DetailsBody = ({ todoItemId }: Props) => {
-  const currentUserData: string | null = decompressFromUTF16(
-    window.localStorage.getItem("user") ?? ""
-  );
+  const { getStorageToken } = useLocalStorage("token");
+  const token = getStorageToken();
 
   const [addTag, setAddTag] = useState<string>("");
 
@@ -37,9 +37,6 @@ const DetailsBody = ({ todoItemId }: Props) => {
       reminderDate: new Date(),
     };
 
-    if (currentUserData) {
-      // TODO: handle online
-    }
     try {
       const todoListString: string = decompressFromUTF16(
         window.localStorage.getItem("todoData")!
@@ -166,9 +163,8 @@ const DetailsBody = ({ todoItemId }: Props) => {
   ) => React.MouseEventHandler = (newItem: TodoItem) => {
     return async () => {
       console.log("Saving todo item");
-      if (currentUserData) {
+      if (token) {
         // TODO: online mode
-        const token = JSON.parse(currentUserData).token;
         if (newItem.id === "new") {
           await addTodo(newItem, token);
         } else {
@@ -202,8 +198,7 @@ const DetailsBody = ({ todoItemId }: Props) => {
   ) => React.MouseEventHandler = (newItem: TodoItem) => {
     return async () => {
       console.log("Deleting todo item");
-      if (currentUserData) {
-        const token = JSON.parse(currentUserData).token;
+      if (token) {
         if (newItem.id === "new") {
           return;
         } else {
