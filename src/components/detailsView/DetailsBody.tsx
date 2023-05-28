@@ -1,11 +1,9 @@
 // chips adapted from https://tailwind-elements.com/docs/standard/components/chips/
 // form adapted from https://v1.tailwindcss.com/components/forms
-import { compressToUTF16, decompressFromUTF16 } from "lz-string";
 import { useState } from "react";
 import { TodoItem } from "../../types/todo";
 import { BACKEND_URL } from "../../utils/constants";
 import { useLocalStorage } from "../../utils/hooks";
-import { createTodoFromJson } from "../../utils/todo";
 import AddToCalendarButton from "../AddToCalendarButton";
 import Appbar from "../Appbar";
 import DatePicker from "../DatePicker";
@@ -23,36 +21,26 @@ const DetailsBody = ({ todoItemId }: Props) => {
   const { getStorageToken } = useLocalStorage("token");
   const token = getStorageToken();
 
-  const [addTag, setAddTag] = useState<string>("");
-
-  const [todoItem, setTodoItem] = useState<TodoItem>(generateTodoBoilerplate());
-
-  function generateTodoBoilerplate(): TodoItem {
-    const blankTodoItem: TodoItem = {
+  const { getStorageTodoList, setStorageTodoList } =
+    useLocalStorage("todoList");
+  const [todo, setTodo] = useState<TodoItem>(() => {
+    const todo = getStorageTodoList()?.find(({ id }) => id === todoItemId) ?? {
       id: todoItemId,
       title: "",
       description: "",
       completed: false,
       tags: [],
-      reminderDate: new Date(),
     };
 
-    try {
-      const todoListString: string = decompressFromUTF16(
-        window.localStorage.getItem("todoData")!
-      )!;
-      const todoList: Record<string, any>[] = JSON.parse(todoListString);
-      // TODO: Hacky fix for dates while awaiting code refactor
-      const todoItem: TodoItem =
-        todoList
-          .map((todoObject) => createTodoFromJson(JSON.stringify(todoObject)))
-          .find((searchItem) => searchItem.id === todoItemId) ?? blankTodoItem;
-      return todoItem;
-    } catch (e) {
-      console.log("Error loading file from database:", e);
-    }
-    return blankTodoItem;
-  }
+    return {
+      ...todo,
+      // FIXME: Hacky fix due to Date objects not being JSON-safe
+      reminderDate: todo.reminderDate ? new Date(todo.reminderDate) : undefined,
+      reminderTime: todo.reminderTime ? new Date(todo.reminderTime) : undefined,
+    };
+  });
+
+  const [addTag, setAddTag] = useState<string>("");
 
   const tagOnChangeHandler: React.ChangeEventHandler<HTMLInputElement> = (
     e
@@ -66,9 +54,9 @@ const DetailsBody = ({ todoItemId }: Props) => {
       e.preventDefault();
       if (htmlElement.value.trim() !== "") {
         setAddTag("");
-        setTodoItem({
-          ...todoItem,
-          tags: [...(todoItem.tags ?? []), htmlElement.value.trim()],
+        setTodo({
+          ...todo,
+          tags: [...(todo.tags ?? []), htmlElement.value.trim()],
         });
       }
     }
@@ -78,9 +66,9 @@ const DetailsBody = ({ todoItemId }: Props) => {
     tag: string
   ): React.MouseEventHandler<HTMLSpanElement> {
     return (e) => {
-      setTodoItem({
-        ...todoItem,
-        tags: todoItem.tags?.filter((t) => t !== tag) ?? [],
+      setTodo({
+        ...todo,
+        tags: todo.tags?.filter((t) => t !== tag) ?? [],
       });
     };
   }
@@ -88,8 +76,8 @@ const DetailsBody = ({ todoItemId }: Props) => {
   const formChangeHandler: React.ChangeEventHandler = (e) => {
     const htmlElement = e.target as HTMLInputElement;
     // console.log(htmlElement.name, htmlElement.checked);
-    setTodoItem({
-      ...todoItem,
+    setTodo({
+      ...todo,
       [htmlElement.name]:
         htmlElement.name === "completed"
           ? htmlElement.checked
@@ -175,20 +163,12 @@ const DetailsBody = ({ todoItemId }: Props) => {
         return;
       }
 
-      try {
-        const todoListString: string = decompressFromUTF16(
-          window.localStorage.getItem("todoData")!
-        )!;
-        const todoList: TodoItem[] = JSON.parse(todoListString) as TodoItem[];
-        const newTodoList: string = JSON.stringify([
-          ...todoList.filter((oldItem) => oldItem.id !== newItem.id),
-          newItem,
-        ]);
-        const serializedTodoList = compressToUTF16(newTodoList);
-        window.localStorage.setItem("todoData", serializedTodoList);
-      } catch (e) {
-        console.log("Error while saving file to database:", e);
-      }
+      const oldList = getStorageTodoList() ?? [];
+      const newTodoList = [
+        ...oldList.filter((oldItem) => oldItem.id !== newItem.id),
+        newItem,
+      ];
+      setStorageTodoList(newTodoList);
       window.history.back();
     };
   };
@@ -207,31 +187,21 @@ const DetailsBody = ({ todoItemId }: Props) => {
         return;
       }
 
-      try {
-        const todoListString: string = decompressFromUTF16(
-          window.localStorage.getItem("todoData")!
-        )!;
-        const todoList: TodoItem[] = JSON.parse(todoListString) as TodoItem[];
-        const newTodoList: string = JSON.stringify(
-          todoList.filter((oldItem) => oldItem.id !== newItem.id)
-        );
-        const serializedTodoList = compressToUTF16(newTodoList);
-        window.localStorage.setItem("todoData", serializedTodoList);
-      } catch (e) {
-        console.log("Error while saving file to database:", e);
-      }
+      const oldList = getStorageTodoList() ?? [];
+      const newTodoList = oldList.filter(
+        (oldItem) => oldItem.id !== newItem.id
+      );
+      setStorageTodoList(newTodoList);
       window.history.back();
     };
   };
 
   const updateDate: (selectedDate: Date) => void = (selectedDate) => {
-    setTodoItem({
-      ...todoItem,
+    setTodo({
+      ...todo,
       reminderDate: selectedDate,
     });
   };
-
-  console.log(todoItem.reminderDate);
 
   return (
     <div className="h-screen flex-grow flex flex-col">
@@ -249,16 +219,16 @@ const DetailsBody = ({ todoItemId }: Props) => {
               placeholder="Title"
               className="flex-grow transition font-outfit font-medium text-2xl tracking-wide appearance-none border-b focus:border-blue-500 text-gray-700 py-2 px-2 leading-tight focus:outline-none"
               onChange={formChangeHandler}
-              value={todoItem.title}
+              value={todo.title}
             />
             <div className="text-sm">
-              <AddToCalendarButton item={todoItem} />
+              <AddToCalendarButton item={todo} />
             </div>
           </div>
           <div className="md:flex md:items-center mb-6">
             <FormLabel htmlFor="completed">Completed:</FormLabel>
             <div className="md:w-4/5 space-y-3">
-              {todoItem.completed ? (
+              {todo.completed ? (
                 <input
                   type="checkbox"
                   name="completed"
@@ -290,7 +260,7 @@ const DetailsBody = ({ todoItemId }: Props) => {
                 onKeyDown={tagFormKeyDownHandler}
               />
               <div className="flex flex-wrap justify-start space-x-2 items-center">
-                {todoItem.tags?.map((tag) => (
+                {todo.tags?.map((tag) => (
                   <TagChip
                     tagName={tag}
                     clickFunction={removeTagFunction(tag)}
@@ -303,7 +273,7 @@ const DetailsBody = ({ todoItemId }: Props) => {
             <FormLabel htmlFor="datepicker">Due:</FormLabel>
             <div className="md:w-4/5 space-y-3">
               <DatePicker
-                initialDate={todoItem.reminderDate}
+                initialDate={todo.reminderDate}
                 callback={updateDate}
               />
             </div>
@@ -318,7 +288,7 @@ const DetailsBody = ({ todoItemId }: Props) => {
                     name="description"
                     className="w-full h-96 resize-none bg-transparent focus:outline-none"
                     onChange={formChangeHandler}
-                    value={todoItem.description}
+                    value={todo.description}
                   />
                 </div>
               </div>
@@ -326,8 +296,8 @@ const DetailsBody = ({ todoItemId }: Props) => {
           </div>
         </form>
         <div className="flex justify-center space-x-6">
-          <SaveTaskButton callback={makeSaveCallbackFunction(todoItem)} />
-          <DeleteTaskButton callback={makeDeleteCallbackFunction(todoItem)} />
+          <SaveTaskButton callback={makeSaveCallbackFunction(todo)} />
+          <DeleteTaskButton callback={makeDeleteCallbackFunction(todo)} />
         </div>
       </div>
       <Footer />
