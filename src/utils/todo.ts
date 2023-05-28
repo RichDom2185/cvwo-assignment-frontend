@@ -16,8 +16,7 @@ export const createTodoFromJson = (json: Json): TodoItem => {
   };
 };
 
-export const creatTodoFromApiParams = (json: Json): TodoItem => {
-  const todo: TodoApiItem = JSON.parse(json);
+export const creatTodoFromApiParams = (todo: TodoApiItem): TodoItem => {
   return {
     id: todo.id,
     title: todo.title ?? "",
