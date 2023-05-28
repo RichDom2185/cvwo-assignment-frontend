@@ -1,23 +1,10 @@
 import { MdPostAdd } from "react-icons/md";
 import { useNavigate } from "react-router";
-// import { decompressFromUTF16 } from 'lz-string';
 
 const NewTaskButton = () => {
-  // const currentUserData: string | null = decompressFromUTF16(window.localStorage.getItem("user") ?? '');
-
   const navigate = useNavigate();
 
   const handleClick: React.MouseEventHandler = (e) => {
-    const dateString: string =
-      new Date().toISOString().replace(/-|:|\.\d\d\d/g, "") ?? "";
-    console.log(dateString);
-    // if (currentUserData) { // online
-    //     // TODO
-    //     return;
-    // }
-    // offline
-    // const generator = require('random-seed');
-    // navigate(`/details/${generator().intBetween(0, 100000)}`);
     navigate(`/details/new`);
   };
 

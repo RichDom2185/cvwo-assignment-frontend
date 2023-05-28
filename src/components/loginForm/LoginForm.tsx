@@ -38,7 +38,6 @@ const LoginForm = ({ type }: Props) => {
   const navigate = useNavigate();
 
   async function fetchUser() {
-    // console.log(JSON.stringify(form));
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },

@@ -80,7 +80,6 @@ const DetailsBody = ({ todoItemId }: Props) => {
 
   const formChangeHandler: React.ChangeEventHandler = (e) => {
     const htmlElement = e.target as HTMLInputElement;
-    // console.log(htmlElement.name, htmlElement.checked);
     setTodo({
       ...todo,
       [htmlElement.name]:
