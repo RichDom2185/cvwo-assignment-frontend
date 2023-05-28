@@ -1,8 +1,8 @@
 // chips adapted from https://tailwind-elements.com/docs/standard/components/chips/
 // form adapted from https://v1.tailwindcss.com/components/forms
 import { useState } from "react";
+import { addTodo, deleteTodo, updateTodo } from "../../api/todo";
 import { TodoItem } from "../../types/todo";
-import { BACKEND_URL } from "../../utils/constants";
 import { useLocalStorage } from "../../utils/hooks";
 import AddToCalendarButton from "../AddToCalendarButton";
 import Appbar from "../Appbar";
@@ -93,51 +93,6 @@ const DetailsBody = ({ todoItemId }: Props) => {
   const formSubmitHandler: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
   };
-
-  async function addTodo(todo: TodoItem, token: string) {
-    const todoString = JSON.stringify({
-      ...todo,
-      tag: todo.tags?.join(", "),
-      reminderDate: todo.reminderDate?.toISOString(),
-    });
-    const requestOptions = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: todoString,
-    };
-    await fetch(`${BACKEND_URL}/todos`, requestOptions);
-  }
-
-  async function updateTodo(todo: TodoItem, token: string) {
-    const todoString = JSON.stringify({
-      ...todo,
-      tag: todo.tags?.join(", "),
-      date: todo.reminderDate?.toISOString(),
-    });
-    const requestOptions = {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: todoString,
-    };
-    await fetch(`${BACKEND_URL}/todos/${todo.id}`, requestOptions);
-  }
-
-  async function deleteTodo(todo: TodoItem, token: string) {
-    const requestOptions = {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    };
-    await fetch(`${BACKEND_URL}/todos/${todo.id}`, requestOptions);
-  }
 
   const makeSaveCallbackFunction: (
     todoItem: TodoItem
