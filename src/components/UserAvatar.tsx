@@ -1,13 +1,11 @@
-import { FaUserCircle } from "react-icons/fa";
-import UserModalButton from "./UserModalButton";
-// import { User } from "../App";
-import { decompressFromUTF16 } from "lz-string";
 import { useEffect, useState } from "react";
+import { FaUserCircle } from "react-icons/fa";
+import { useLocalStorage } from "../utils/hooks";
+import UserModalButton from "./UserModalButton";
 
 const UserAvatar = () => {
-  const currentUserData: string | null = decompressFromUTF16(
-    window.localStorage.getItem("user") ?? ""
-  );
+  const { getStorageCurrentUser } = useLocalStorage("currentUser");
+  const currentUser = getStorageCurrentUser();
 
   const [nameOfUser, setNameOfUser] = useState<String>("Anonymous User");
   const [emailOfUser, setEmailOfUser] = useState<String>("test@gmail.com");
@@ -17,11 +15,11 @@ const UserAvatar = () => {
     setModalVisibility((modalVisibility) => !modalVisibility);
 
   useEffect(() => {
-    if (currentUserData) {
-      setNameOfUser(JSON.parse(currentUserData).name);
-      setEmailOfUser(JSON.parse(currentUserData).email);
+    if (currentUser) {
+      setNameOfUser(currentUser.name);
+      setEmailOfUser(currentUser.email);
     }
-  }, [currentUserData]);
+  }, [currentUser]);
 
   // useEffect(() => {
   //     if (modalVisibility) {
@@ -54,9 +52,9 @@ const UserAvatar = () => {
           <div className="flex justify-between pt-2">
             {/* TODO: Add onClick handler */}
             <UserModalButton linkTo="/login">
-              {currentUserData ? "Sign Out" : "Sign In"}
+              {currentUser ? "Sign Out" : "Sign In"}
             </UserModalButton>
-            {!currentUserData && (
+            {!currentUser && (
               <UserModalButton linkTo="/signup">Create Account</UserModalButton>
             )}
           </div>
