@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { TagColor } from "../../types/tag";
 import Tag from "./Tag";
 import TaskCheckbox from "./TaskCheckbox";
 
@@ -79,7 +80,8 @@ const Task: React.FC<Props> = ({
             tags.map((tag, index) => (
               <Tag
                 key={index}
-                color={colorFromTag(tag)}
+                // FIXME: Refactor this logic
+                color={colorFromTag(tag) as TagColor}
                 tagName={tag}
                 checked={checked}
                 callback={updateFilter(tag)}
