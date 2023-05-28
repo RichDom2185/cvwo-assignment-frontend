@@ -20,46 +20,6 @@ type ResponseData = {
 };
 
 const TaskList = () => {
-  // const [tasks, setTasks] = useState([
-  //     false, true, true, false, false, true
-  // ]);
-
-  // const testSeed : TodoItem[] = [
-  //     // sample data
-  //     {
-  //         id: "1xcvhkxjvxcv",
-  //         title: "This is the test title",
-  //         description: "Test description",
-  //         completed: false,
-  //         tags: ["test", "abc"],
-  //         reminderDate: new Date(),
-  //     },
-  //     {
-  //         id: "2asjkbkxvhxkcv",
-  //         title: "This is the title",
-  //         description: "Test description",
-  //         completed: true,
-  //         tags: ["test", "2ef"],
-  //         reminderDate: new Date(),
-  //     },
-  //     {
-  //         id: "3kjxcv kjxv",
-  //         title: "This is the test title",
-  //         description: "Test description",
-  //         completed: false,
-  //         tags: ["test", "abc"],
-  //         reminderDate: new Date(),
-  //     },
-  //     {
-  //         id: "2aduasdiasdhascx",
-  //         title: "This is the test title",
-  //         description: "Test description",
-  //         completed: false,
-  //         tags: ["xcvxcv", "abc"],
-  //         reminderDate: new Date(),
-  //     },
-  // ];
-
   const { getStorageToken } = useLocalStorage("token");
   const token = getStorageToken();
 
@@ -143,14 +103,6 @@ const TaskList = () => {
     }
   }, [todoList]);
 
-  // let checkedList : boolean[] = [false, true, true, false, false, true];
-
-  // function makeChangeFunction(index: number) {
-  //     return (event: React.ChangeEvent<HTMLInputElement>) => {
-  //         setTasks(tasks.map((item, i) => i === index ? event.target.checked : item));
-  //     }
-  // }
-
   function toggleTodoItemState(uuid: string) {
     return (event: React.ChangeEvent<HTMLInputElement>) => {
       // setTasks(tasks.map((item) => i === uuid ? event.target.checked : item));
@@ -165,16 +117,6 @@ const TaskList = () => {
   }
 
   const [activeTabs, setActiveTabs] = useState<string[]>([]);
-
-  // function makeUpdateFilterFunction(): (tagName: string) => React.MouseEventHandler {
-  //     return (tagName: string) => (e) => {
-  //         e.stopPropagation();
-  //         setActiveTabs(activeTabs.includes(tagName)
-  //             ? activeTabs.filter(t => t !== tagName)
-  //             : [...activeTabs, tagName]);
-  //     };
-  // }
-
   const updateFilterFunction: (tagName: string) => React.MouseEventHandler =
     (tagName: string) => (e) => {
       e.stopPropagation();
@@ -185,15 +127,11 @@ const TaskList = () => {
       );
     };
 
-  // function hasCommonItems(arr1: string[], arr2: string[]) : boolean {
-  //     return arr1.some(item => arr2.includes(item));
-  // }
 
   return (
     <div className="bg-gray-50 rounded-2xl">
       <Tabbar activeTabs={activeTabs} updateFilter={updateFilterFunction} />
       <div className="divide-y divide-gray-200 px-3">
-        {/* {tasks.map((item, index) => <Task checked={item} onChange={makeChangeFunction(index)} text="test lstesere nvbxc rfuod asdjksa c" />)} */}
         {todoList
           .filter(
             (todoItem) =>
