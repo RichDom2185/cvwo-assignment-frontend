@@ -18,3 +18,24 @@ export enum TagColor {
   PINK = "pink",
   ROSE = "rose",
 }
+
+export const tagColors: ReadonlyArray<TagColor> = [
+  TagColor.GRAY,
+  TagColor.RED,
+  TagColor.ORANGE,
+  TagColor.AMBER,
+  TagColor.YELLOW,
+  TagColor.LIME,
+  TagColor.GREEN,
+  TagColor.EMERALD,
+  TagColor.TEAL,
+  TagColor.CYAN,
+  TagColor.SKY,
+  TagColor.BLUE,
+  TagColor.INDIGO,
+  TagColor.VIOLET,
+  TagColor.PURPLE,
+  TagColor.FUCHSIA,
+  TagColor.PINK,
+  TagColor.ROSE,
+] as const;

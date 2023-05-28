@@ -1,4 +1,4 @@
-import { TagColor } from "../types/tag";
+import { TagColor, tagColors } from "../types/tag";
 
 const colorToBackgroundClassMap = {
   [TagColor.GRAY]: "bg-gray-100",
@@ -82,4 +82,10 @@ export function generateColorClasses(
     classes.push(colorToBorderClassMap[color]);
   }
   return classes.join(" ");
+}
+
+const generator = require("random-seed");
+export function colorFromTag(tag: string): TagColor {
+  const index: number = generator(tag).intBetween(0, tagColors.length - 1);
+  return tagColors[index];
 }

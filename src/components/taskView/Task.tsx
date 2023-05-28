@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { TagColor } from "../../types/tag";
+import { colorFromTag } from "../../utils/tag";
 import Tag from "./Tag";
 import TaskCheckbox from "./TaskCheckbox";
 
@@ -14,36 +14,6 @@ export interface Props {
 }
 
 const defaultText: string = "Untitled To-Do";
-
-const colors: string[] = [
-  "gray",
-  "red",
-  "orange",
-  "amber",
-  "yellow",
-  "lime",
-  "green",
-  "emerald",
-  "teal",
-  "cyan",
-  "sky",
-  "blue",
-  "indigo",
-  "violet",
-  "purple",
-  "fuchscia",
-  "pink",
-  "rose",
-];
-
-const generator = require("random-seed");
-
-function colorFromTag(tag: string): string {
-  // const hash: number = tag.charCodeAt(0) + tag.charCodeAt(tag.length - 1);
-  // return colors[hash % colors.length];
-  const index: number = generator(tag).intBetween(0, colors.length - 1);
-  return colors[index];
-}
 
 function onClickHandler(uuid: string): React.MouseEventHandler<HTMLDivElement> {
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -80,8 +50,7 @@ const Task: React.FC<Props> = ({
             tags.map((tag, index) => (
               <Tag
                 key={index}
-                // FIXME: Refactor this logic
-                color={colorFromTag(tag) as TagColor}
+                color={colorFromTag(tag)}
                 tagName={tag}
                 checked={checked}
                 callback={updateFilter(tag)}
