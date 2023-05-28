@@ -1,9 +1,11 @@
+import React from "react";
+
 interface Props {
   children: React.ReactNode;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-const LogoButton = ({ children, onClick }: Props) => {
+const LogoButton: React.FC<Props> = ({ children, onClick }) => {
   return (
     <button
       onClick={onClick}

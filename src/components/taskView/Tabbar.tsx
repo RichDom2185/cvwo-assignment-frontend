@@ -1,3 +1,4 @@
+import React from "react";
 import Tab from "./Tab";
 
 interface Props {
@@ -5,7 +6,7 @@ interface Props {
   updateFilter: (tagName: string) => React.MouseEventHandler;
 }
 
-const Tabbar = ({ activeTabs, updateFilter }: Props) => {
+const Tabbar: React.FC<Props> = ({ activeTabs, updateFilter }) => {
   return (
     <div className="flex items-center gap-x-3 bg-blue-200 shadow-sm shadow-blue-300 px-3 rounded-t-2xl">
       <span className="font-outfit">Viewing:</span>

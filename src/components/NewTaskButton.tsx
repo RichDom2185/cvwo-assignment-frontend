@@ -1,7 +1,8 @@
+import React from "react";
 import { MdPostAdd } from "react-icons/md";
 import { useNavigate } from "react-router";
 
-const NewTaskButton = () => {
+const NewTaskButton: React.FC = () => {
   const navigate = useNavigate();
 
   const handleClick: React.MouseEventHandler = (e) => {

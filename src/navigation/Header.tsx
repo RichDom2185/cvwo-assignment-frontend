@@ -1,5 +1,4 @@
-import { useState } from "react";
-
+import React, { useState } from "react";
 import CollapseSidebarButton from "./CollapseSidebarButton";
 import HeaderMenuItem from "./HeaderMenuItem";
 import NavButton from "./NavButton";
@@ -9,7 +8,7 @@ thing.do © 2022 Richard Dominick
 
 thing.do is a simple todo app built with React, TypeScript, and Ruby on Rails. It was built as part of the 2021 winter assignment by National University of Singapore's (NUS) Computing Voluntary and Welfare Organisation (CVWO). This app is open source and is available on GitHub at https://github.com/RichDom2185/cvwo-assignment-frontend`;
 
-const Header = () => {
+const Header: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
 
   const displayAboutMessage: React.MouseEventHandler = () => {

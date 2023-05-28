@@ -1,11 +1,11 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { fetchTasks } from "../../api/todo";
 import { TodoItem } from "../../types/todo";
 import { useLocalStorage } from "../../utils/hooks";
 import Tabbar from "./Tabbar";
 import Task from "./Task";
 
-const TaskList = () => {
+const TaskList: React.FC = () => {
   const { getStorageToken } = useLocalStorage("token");
   const token = getStorageToken();
 

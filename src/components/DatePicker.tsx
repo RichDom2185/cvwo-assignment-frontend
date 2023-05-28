@@ -9,7 +9,7 @@ import {
   subMonths,
   subYears,
 } from "date-fns";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   HiOutlineCalendar,
   HiOutlineChevronLeft,
@@ -23,7 +23,7 @@ interface Props {
   callback: (selectedDate: Date) => void;
 }
 
-export default function DatePicker({ initialDate, callback }: Props) {
+const DatePicker: React.FC<Props> = ({ initialDate, callback }) => {
   const DAYS = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
   const [dayCount, setDayCount] = useState<Array<number>>([]);
   const [blankDays, setBlankDays] = useState<Array<number>>([]);
@@ -316,4 +316,6 @@ export default function DatePicker({ initialDate, callback }: Props) {
     //   </div>
     // </div>
   );
-}
+};
+
+export default DatePicker;

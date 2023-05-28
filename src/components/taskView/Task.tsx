@@ -1,3 +1,4 @@
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import Tag from "./Tag";
 import TaskCheckbox from "./TaskCheckbox";
@@ -51,14 +52,14 @@ function onClickHandler(uuid: string): React.MouseEventHandler<HTMLDivElement> {
   };
 }
 
-const Task = ({
+const Task: React.FC<Props> = ({
   id,
   checked,
   onChange,
   title: text = defaultText,
   tags,
   updateFilter,
-}: Props) => {
+}) => {
   return (
     <div className="flex gap-2 py-2">
       <TaskCheckbox checked={checked} onChange={onChange} />

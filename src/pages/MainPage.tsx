@@ -1,7 +1,8 @@
+import React from "react";
 import MainBody from "../MainBody";
 import Header from "../navigation/Header";
 
-const MainPage = () => {
+const MainPage: React.FC = () => {
   return (
     <div className="flex justify-between items-start">
       <Header />

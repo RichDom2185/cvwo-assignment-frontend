@@ -1,6 +1,7 @@
+import React from "react";
 import { HiOutlineChevronLeft } from "react-icons/hi";
 
-const BackButton = () => {
+const BackButton: React.FC = () => {
   const clickFunction: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
     window.history.back();

@@ -1,3 +1,4 @@
+import React from "react";
 import { Link } from "react-router-dom";
 
 interface Props {
@@ -5,7 +6,7 @@ interface Props {
   linkTo: string;
 }
 
-const UserModalButton = ({ children, linkTo }: Props) => {
+const UserModalButton: React.FC<Props> = ({ children, linkTo }) => {
   return (
     <Link to={linkTo}>
       <div className="px-2 py-1 text-sm rounded bg-white shadow-sm hover:shadow">

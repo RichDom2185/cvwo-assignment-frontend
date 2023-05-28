@@ -1,9 +1,11 @@
+import React from "react";
+
 interface Props {
   htmlFor: string;
   children: React.ReactNode;
 }
 
-const FormLabel = ({ htmlFor, children }: Props) => {
+const FormLabel: React.FC<Props> = ({ htmlFor, children }) => {
   return (
     <div className="md:w-1/5 mr-2">
       <label

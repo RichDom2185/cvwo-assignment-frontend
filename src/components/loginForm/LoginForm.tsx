@@ -1,4 +1,4 @@
-import { ChangeEventHandler, FormEventHandler, useState } from "react";
+import React, { ChangeEventHandler, FormEventHandler, useState } from "react";
 import { FaApple, FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { useNavigate } from "react-router";
@@ -12,7 +12,7 @@ interface Props {
   type: string;
 }
 
-const LoginForm = ({ type }: Props) => {
+const LoginForm: React.FC<Props> = ({ type }) => {
   const [form, setForm] = useState({
     name: "",
     email: "",

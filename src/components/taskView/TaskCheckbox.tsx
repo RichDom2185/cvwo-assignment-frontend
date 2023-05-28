@@ -1,9 +1,11 @@
+import React from "react";
+
 export interface Props {
   checked: boolean;
   onChange: React.ChangeEventHandler;
 }
 
-const TaskCheckbox = ({ checked, onChange }: Props) => {
+const TaskCheckbox: React.FC<Props> = ({ checked, onChange }) => {
   return checked ? (
     <input
       type="checkbox"

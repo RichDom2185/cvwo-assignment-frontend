@@ -1,9 +1,9 @@
+import React from "react";
+import { useParams } from "react-router";
 import DetailsBody from "../components/detailsView/DetailsBody";
 import Header from "../navigation/Header";
 
-import { useParams } from "react-router";
-
-const DetailsPage = () => {
+const DetailsPage: React.FC = () => {
   const params = useParams();
 
   // const [todoItem, setTodoItem] = useState<TodoItem>({

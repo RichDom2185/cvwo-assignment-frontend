@@ -1,3 +1,5 @@
+import React from "react";
+
 interface Props {
   tabName: string;
   disabled?: boolean;
@@ -5,12 +7,12 @@ interface Props {
   callback?: React.MouseEventHandler;
 }
 
-const Tab = ({
+const Tab: React.FC<Props> = ({
   tabName,
   disabled = false,
   isColored = false,
   callback = () => {},
-}: Props) => {
+}) => {
   const colors: string[] = [
     "gray",
     "red",

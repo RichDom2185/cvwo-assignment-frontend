@@ -1,3 +1,5 @@
+import React from "react";
+
 export interface Props {
   tagName: string;
   color: string;
@@ -5,7 +7,7 @@ export interface Props {
   callback?: React.MouseEventHandler;
 }
 
-const Tag = (props: Props) => {
+const Tag: React.FC<Props> = (props) => {
   const bgColor: string = props.checked ? "gray" : props.color;
 
   const onClick = props.callback ?? (() => {});

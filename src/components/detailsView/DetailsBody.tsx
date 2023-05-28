@@ -1,6 +1,6 @@
 // chips adapted from https://tailwind-elements.com/docs/standard/components/chips/
 // form adapted from https://v1.tailwindcss.com/components/forms
-import { useState } from "react";
+import React, { useState } from "react";
 import { addTodo, deleteTodo, updateTodo } from "../../api/todo";
 import { TodoItem } from "../../types/todo";
 import { useLocalStorage } from "../../utils/hooks";
@@ -17,7 +17,7 @@ interface Props {
   todoItemId: string;
 }
 
-const DetailsBody = ({ todoItemId }: Props) => {
+const DetailsBody: React.FC<Props> = ({ todoItemId }) => {
   const { getStorageToken } = useLocalStorage("token");
   const token = getStorageToken();
 

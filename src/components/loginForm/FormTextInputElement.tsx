@@ -1,3 +1,5 @@
+import React from "react";
+
 interface Props {
   name: string;
   label: string;
@@ -6,13 +8,13 @@ interface Props {
   changeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const FormTextInputElement = ({
+const FormTextInputElement: React.FC<Props> = ({
   name,
   label,
   value,
   placeholder = "",
   changeHandler,
-}: Props) => {
+}) => {
   return (
     <div className="flex flex-col space-y-2 mt-3 first:mt-0">
       <label

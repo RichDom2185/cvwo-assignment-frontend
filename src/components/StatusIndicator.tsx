@@ -1,7 +1,8 @@
+import React from "react";
 import { MdCloudQueue, MdOutlineCloudOff } from "react-icons/md";
 import { useLocalStorage } from "../utils/hooks";
 
-const StatusIndicator = () => {
+const StatusIndicator: React.FC = () => {
   const { getStorageToken } = useLocalStorage("token");
   const isLoggedIn = !!getStorageToken();
 

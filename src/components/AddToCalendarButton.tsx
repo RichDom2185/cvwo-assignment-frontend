@@ -1,3 +1,4 @@
+import React from "react";
 import { FaRegCalendarPlus } from "react-icons/fa";
 import { TodoItem } from "../types/todo";
 
@@ -5,7 +6,7 @@ interface Props {
   item: TodoItem;
 }
 
-const AddToCalendarButton = ({ item }: Props) => {
+const AddToCalendarButton: React.FC<Props> = ({ item }) => {
   const handleClick: React.MouseEventHandler = (e) => {
     // console.log('Add to calendar');
     // window.open('https://calendar.google.com/calendar/r/eventedit?text=' + item.title + '&dates=' + item.reminderDate?.toISOString() + '/' + item.reminderDate?.toISOString() + '&details=' + item.description + '&location=' + item.tags?.join(', ') + '&ctz=America/New_York');

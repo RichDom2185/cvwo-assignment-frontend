@@ -1,3 +1,4 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import LoginForm from "../components/loginForm/LoginForm";
 
@@ -5,7 +6,7 @@ interface Props {
   type: string;
 }
 
-const LoginPage = ({ type }: Props) => {
+const LoginPage: React.FC<Props> = ({ type }) => {
   return (
     <div className="min-h-screen bg-gray-200 flex">
       <div className="flex-grow flex flex-col justify-center items-center pt-6 sm:pb-6">

@@ -1,3 +1,4 @@
+import React from "react";
 import {
   HiOutlineChevronDoubleLeft,
   HiOutlineChevronDoubleRight,
@@ -8,7 +9,7 @@ interface Props {
   collapsed: boolean;
 }
 
-const CollapseSidebarButton = (props: Props) => {
+const CollapseSidebarButton: React.FC<Props> = (props) => {
   return (
     <div
       className="transition flex items-center justify-center text-gray-400 bg-gray-100 hover:bg-gray-200 p-2 rounded-lg cursor-pointer"
