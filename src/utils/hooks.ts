@@ -2,7 +2,9 @@ import { compressToUTF16, decompressFromUTF16 } from "lz-string";
 import { LocalStorage } from "../types/localStorage";
 
 type MakeGetterTypes<T extends Record<string, any>> = {
-  [key in keyof T as `getStorage${Capitalize<key & string>}`]: () => T[key];
+  [key in keyof T as `getStorage${Capitalize<key & string>}`]: () =>
+    | T[key]
+    | undefined;
 };
 
 type MakeSetterTypes<T extends Record<string, any>> = {
