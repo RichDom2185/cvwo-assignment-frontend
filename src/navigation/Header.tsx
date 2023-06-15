@@ -16,11 +16,9 @@ const Header: React.FC = () => {
   };
 
   function collapseSidebar(): void {
-    // console.log("collapse sidebar");
     const sidebar: HTMLElement = document.getElementById("sidebar")!;
     // const title: HTMLElement = document.getElementById("app-title")!;
     // document.querySelectorAll('#sidebar > * + * ').forEach((value: Element) => {
-    //     // console.log(value);
     //     // value.classList.toggle("hidden");
     //     if (value.tagName === "H1") {
     //         value.textContent = "";
@@ -28,7 +26,6 @@ const Header: React.FC = () => {
     // });
     sidebar.classList.toggle("collapsed");
     // title.textContent = "";
-    // console.log("collapsed: " + collapsed);
     setTimeout(
       () => {
         setCollapsed(!collapsed);
@@ -66,9 +63,9 @@ const Header: React.FC = () => {
           <ul className="space-y-3">
             <NavButton text="Default Workspace" />
             {/* <NavButton text="2" />
-                        <NavButton text="3" />
-                        <NavButton text="4" />
-                        <NavButton text="5" /> */}
+            <NavButton text="3" />
+            <NavButton text="4" />
+            <NavButton text="5" /> */}
           </ul>
         </nav>
         <div className="secondary-nav">

@@ -34,7 +34,6 @@ const DatePicker: React.FC<Props> = ({ initialDate, callback }) => {
   const [type, setType] = useState<DatepickerType>("date");
 
   useEffect(() => {
-    console.log(selectedDate);
     callback(selectedDate);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedDate]);

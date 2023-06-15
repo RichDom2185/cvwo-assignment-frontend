@@ -70,7 +70,7 @@ const DetailsBody: React.FC<Props> = ({ todoItemId }) => {
   function removeTagFunction(
     tag: string
   ): React.MouseEventHandler<HTMLSpanElement> {
-    return (e) => {
+    return () => {
       setTodo({
         ...todo,
         tags: todo.tags?.filter((t) => t !== tag) ?? [],
@@ -104,7 +104,6 @@ const DetailsBody: React.FC<Props> = ({ todoItemId }) => {
         } else {
           await updateTodo(newItem, token);
         }
-        console.log("Saved todo item");
         window.history.back();
         return;
       }
@@ -123,7 +122,6 @@ const DetailsBody: React.FC<Props> = ({ todoItemId }) => {
     todoItem: TodoItem
   ) => React.MouseEventHandler = (newItem: TodoItem) => {
     return async () => {
-      console.log("Deleting todo item");
       if (newItem.id === "new") {
         window.history.back();
         return;

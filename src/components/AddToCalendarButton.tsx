@@ -7,12 +7,10 @@ interface Props {
 }
 
 const AddToCalendarButton: React.FC<Props> = ({ item }) => {
-  const handleClick: React.MouseEventHandler = (e) => {
-    // console.log('Add to calendar');
+  const handleClick: React.MouseEventHandler = () => {
     // window.open('https://calendar.google.com/calendar/r/eventedit?text=' + item.title + '&dates=' + item.reminderDate?.toISOString() + '/' + item.reminderDate?.toISOString() + '&details=' + item.description + '&location=' + item.tags?.join(', ') + '&ctz=America/New_York');
     const dateString: string =
       item.reminderDate?.toISOString().replace(/-|:|\.\d\d\d/g, "") ?? "";
-    console.log(dateString);
     window.open(
       "https://calendar.google.com/calendar/render?action=TEMPLATE&text=" +
         item.title +
