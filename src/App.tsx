@@ -5,12 +5,6 @@ import LoginPage from "./pages/LoginPage";
 import MainPage from "./pages/MainPage";
 // import TestingPage from './pages/TestingPage';
 
-export type User = {
-  name: string;
-  email: string;
-  token: string;
-};
-
 function App() {
   return (
     <Router>

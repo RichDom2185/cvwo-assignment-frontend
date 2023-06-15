@@ -173,22 +173,13 @@ const DetailsBody: React.FC<Props> = ({ todoItemId }) => {
           <div className="md:flex md:items-center mb-6">
             <FormLabel htmlFor="completed">Completed:</FormLabel>
             <div className="md:w-4/5 space-y-3">
-              {todo.completed ? (
-                <input
-                  type="checkbox"
-                  name="completed"
-                  id="completed"
-                  onChange={formChangeHandler}
-                  defaultChecked
-                />
-              ) : (
-                <input
-                  type="checkbox"
-                  name="completed"
-                  id="completed"
-                  onChange={formChangeHandler}
-                />
-              )}
+              <input
+                type="checkbox"
+                name="completed"
+                id="completed"
+                onChange={formChangeHandler}
+                defaultChecked={todo.completed}
+              />
             </div>
           </div>
           <div className="md:flex md:items-center mb-6">

@@ -1,6 +1,6 @@
 import { TodoApiItem, TodoItem } from "../types/todo";
 import { BACKEND_URL } from "../utils/constants";
-import { creatTodoFromApiParams } from "../utils/todo";
+import { creatTodoFromApiParams, createApiParamsFromTodo } from "../utils/todo";
 
 // list + read; TODO: Decouple
 export async function fetchTasks(token: string | undefined) {
@@ -23,11 +23,7 @@ export async function fetchTasks(token: string | undefined) {
 
 // create
 export async function addTodo(todo: TodoItem, token: string) {
-  const todoString = JSON.stringify({
-    ...todo,
-    tag: todo.tags?.join(", "),
-    reminderDate: todo.reminderDate?.toISOString(),
-  });
+  const todoString = createApiParamsFromTodo(todo);
   const requestOptions = {
     method: "POST",
     headers: {
@@ -41,11 +37,7 @@ export async function addTodo(todo: TodoItem, token: string) {
 
 // update
 export async function updateTodo(todo: TodoItem, token: string) {
-  const todoString = JSON.stringify({
-    ...todo,
-    tag: todo.tags?.join(", "),
-    date: todo.reminderDate?.toISOString(),
-  });
+  const todoString = createApiParamsFromTodo(todo);
   const requestOptions = {
     method: "PUT",
     headers: {

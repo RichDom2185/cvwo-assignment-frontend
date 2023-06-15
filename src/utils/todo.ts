@@ -1,20 +1,6 @@
 import { TodoApiItem, TodoItem } from "../types/todo";
 
-type Json = string;
-
-// TODO: Deprecate this after code refactor
-export const createTodoFromJson = (json: Json): TodoItem => {
-  const todo = JSON.parse(json);
-  return {
-    id: todo.id ?? "",
-    title: todo.title ?? "",
-    description: todo.description ?? "",
-    completed: todo.completed ?? false,
-    tags: todo.tags ?? [],
-    reminderDate: todo.reminderDate ? new Date(todo.reminderDate) : undefined,
-    reminderTime: todo.reminderTime ? new Date(todo.reminderTime) : undefined,
-  };
-};
+type JsonString = string;
 
 export const creatTodoFromApiParams = (todo: TodoApiItem): TodoItem => {
   return {
@@ -28,7 +14,7 @@ export const creatTodoFromApiParams = (todo: TodoApiItem): TodoItem => {
   };
 };
 
-export const createApiParamsFromTodo = (todo: TodoItem): Json => {
+export const createApiParamsFromTodo = (todo: TodoItem): JsonString => {
   const apiData: TodoApiItem = {
     ...todo,
     tag: todo.tags?.join(", "),
