@@ -256,7 +256,7 @@ const DatePicker: React.FC<Props> = ({ initialDate, callback }) => {
                     >
                       <div
                         onClick={setDateValue(d)}
-                        className={`transition duration-75 cursor-pointer text-center text-sm leading-none rounded-md leading-loose ${
+                        className={`transition duration-75 py-1 cursor-pointer text-center text-sm leading-none rounded-md ${
                           isToday(d)
                             ? "bg-blue-500 text-white font-bold hover:bg-blue-700"
                             : "text-gray-700 hover:bg-blue-100"
