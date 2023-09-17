@@ -22,7 +22,10 @@ const TaskList: React.FC = () => {
 
   // Get Todos on mount
   useEffect(() => {
-    fetchTasks(token).then((tasks) => handleSetTodoList(tasks));
+    // Do not reload tasks when in offline mode (no token)
+    if (token !== undefined) {
+      fetchTasks(token).then((tasks) => handleSetTodoList(tasks));
+    }
   }, [handleSetTodoList, token]);
 
   function toggleTodoItemState(uuid: string) {

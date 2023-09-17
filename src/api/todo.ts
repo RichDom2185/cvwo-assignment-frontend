@@ -3,10 +3,7 @@ import { BACKEND_URL } from "../utils/constants";
 import { creatTodoFromApiParams, createApiParamsFromTodo } from "../utils/todo";
 
 // list + read; TODO: Decouple
-export async function fetchTasks(token: string | undefined) {
-  if (!token) {
-    return [];
-  }
+export async function fetchTasks(token: string) {
   const requestOptions = {
     method: "GET",
     headers: {
