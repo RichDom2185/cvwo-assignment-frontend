@@ -1,3 +1,4 @@
+import { create } from "random-seed";
 import { TagColor, tagColors } from "../types/tag";
 
 const colorToBackgroundClassMap = {
@@ -84,8 +85,7 @@ export function generateColorClasses(
   return classes.join(" ");
 }
 
-const generator = require("random-seed");
 export function colorFromTag(tag: string): TagColor {
-  const index: number = generator(tag).intBetween(0, tagColors.length - 1);
+  const index: number = create(tag).intBetween(0, tagColors.length - 1);
   return tagColors[index];
 }
