@@ -20,8 +20,36 @@
   },
   "eslintConfig": {
     "extends": [
-      "react-app"
-    ]
+      "eslint:recommended",
+      "plugin:@typescript-eslint/recommended",
+      "plugin:react-hooks/recommended",
+      "plugin:react/recommended",
+      "plugin:react/jsx-runtime"
+    ],
+    "ignorePatterns": [
+      "dist/",
+      "node_modules/",
+      "vite.config.ts"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "ecmaFeatures": {
+        "jsx": true
+      },
+      "ecmaVersion": 2022,
+      "project": "./tsconfig.json",
+      "sourceType": "module"
+    },
+    "settings": {
+      "react": {
+        "version": "detect"
+      }
+    },
+    "rules": {
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-unused-vars": "warn",
+      "prefer-const": "warn"
+    }
   },
   "browserslist": {
     "production": [
@@ -40,9 +68,13 @@
     "@types/random-seed": "^0.3.5",
     "@types/react": "^18.2.78",
     "@types/react-dom": "^18.2.25",
+    "@typescript-eslint/eslint-plugin": "^7.6.0",
+    "@typescript-eslint/parser": "^7.6.0",
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.1",
     "eslint": "^8.57.0",
+    "eslint-plugin-react": "^7.34.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "postcss": "^8.4.5",
     "sass": "^1.75.0",
     "tailwindcss": "^3.3.2",
