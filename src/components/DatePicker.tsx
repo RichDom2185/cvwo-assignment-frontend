@@ -84,16 +84,16 @@ const DatePicker: React.FC<Props> = ({ initialDate, callback }) => {
   };
 
   const getDayCount = (date: Date) => {
-    let daysInMonth = getDaysInMonth(date);
+    const daysInMonth = getDaysInMonth(date);
 
     // find where to start calendar day of week
-    let dayOfWeek = getDay(new Date(date.getFullYear(), date.getMonth(), 1));
-    let blankdaysArray = [];
+    const dayOfWeek = getDay(new Date(date.getFullYear(), date.getMonth(), 1));
+    const blankdaysArray = [];
     for (let i = 1; i <= dayOfWeek; i++) {
       blankdaysArray.push(i);
     }
 
-    let daysArray = [];
+    const daysArray = [];
     for (let i = 1; i <= daysInMonth; i++) {
       daysArray.push(i);
     }

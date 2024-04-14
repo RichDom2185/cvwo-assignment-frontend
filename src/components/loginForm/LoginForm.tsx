@@ -56,7 +56,6 @@ const LoginForm: React.FC<Props> = ({ type }) => {
     setStorageCurrentUser(loggedInUser);
     setStorageToken(data.token);
 
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     navigate("/");
 
     // TODO: Handle errors pending refactor

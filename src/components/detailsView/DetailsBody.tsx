@@ -194,8 +194,9 @@ const DetailsBody: React.FC<Props> = ({ todoItemId }) => {
                 onKeyDown={tagFormKeyDownHandler}
               />
               <div className="flex flex-wrap justify-start space-x-2 items-center">
-                {todo.tags?.map((tag) => (
+                {todo.tags?.map((tag, i) => (
                   <TagChip
+                    key={`${tag}-${i}`}
                     tagName={tag}
                     clickFunction={removeTagFunction(tag)}
                   />
