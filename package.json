@@ -4,7 +4,7 @@
   "type": "module",
   "private": true,
   "dependencies": {
-    "date-fns": "^3.0.0",
+    "date-fns": "^4.0.0",
     "lz-string": "^1.5.0",
     "random-seed": "^0.3.0",
     "react": "^18.2.0",
