@@ -66,7 +66,7 @@
     ]
   },
   "devDependencies": {
-    "@types/node": "^20.12.7",
+    "@types/node": "^22.0.0",
     "@types/random-seed": "^0.3.5",
     "@types/react": "^18.2.78",
     "@types/react-dom": "^18.2.25",
