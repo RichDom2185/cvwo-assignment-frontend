@@ -1,4 +1,3 @@
-import React from "react";
 import { colorFromTag, generateColorClasses } from "../../utils/tag";
 
 interface Props {

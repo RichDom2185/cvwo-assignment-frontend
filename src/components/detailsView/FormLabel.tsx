@@ -1,5 +1,3 @@
-import React from "react";
-
 interface Props {
   htmlFor: string;
   children: React.ReactNode;

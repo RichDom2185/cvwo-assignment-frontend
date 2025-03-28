@@ -1,4 +1,3 @@
-import React from "react";
 import MainBody from "../MainBody";
 import Header from "../navigation/Header";
 

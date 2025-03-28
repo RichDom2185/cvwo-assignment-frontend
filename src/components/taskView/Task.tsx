@@ -1,4 +1,3 @@
-import React from "react";
 import { useNavigate } from "react-router";
 import { colorFromTag } from "../../utils/tag";
 import Tag from "./Tag";

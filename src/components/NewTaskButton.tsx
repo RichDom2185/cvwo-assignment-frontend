@@ -1,4 +1,3 @@
-import React from "react";
 import { MdPostAdd } from "react-icons/md";
 import { useNavigate } from "react-router";
 

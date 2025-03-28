@@ -1,4 +1,3 @@
-import React from "react";
 import { MdCloudQueue, MdOutlineCloudOff } from "react-icons/md";
 import { useLocalStorage } from "../utils/hooks";
 

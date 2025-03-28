@@ -1,4 +1,3 @@
-import React from "react";
 import { TagColor } from "../../types/tag";
 import { generateColorClasses } from "../../utils/tag";
 

@@ -1,4 +1,3 @@
-import React from "react";
 import { BiTrash } from "react-icons/bi";
 
 interface Props {

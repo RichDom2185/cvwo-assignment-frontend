@@ -1,4 +1,3 @@
-import React from "react";
 import { HiOutlineChevronLeft } from "react-icons/hi";
 
 const BackButton: React.FC = () => {

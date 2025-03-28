@@ -1,4 +1,3 @@
-import React from "react";
 import { FaRegCalendarPlus } from "react-icons/fa";
 import { TodoItem } from "../types/todo";
 

@@ -1,5 +1,3 @@
-import React from "react";
-
 export interface Props {
   checked: boolean;
   onChange: React.ChangeEventHandler;
