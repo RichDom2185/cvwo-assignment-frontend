@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 import StatusIndicator from "./StatusIndicator";
 import UserAvatar from "./UserAvatar";
 import BackButton from "./detailsView/BackButton";

@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { colorFromTag } from "../../utils/tag";
 import Tag from "./Tag";
 import TaskCheckbox from "./TaskCheckbox";
@@ -39,9 +39,7 @@ const Task: React.FC<Props> = ({
         onClick={onClickHandler(id)}
       >
         <p
-          className={
-            "shrink" + (checked ? " line-through text-gray-500" : "")
-          }
+          className={"shrink" + (checked ? " line-through text-gray-500" : "")}
         >
           {text}
         </p>
