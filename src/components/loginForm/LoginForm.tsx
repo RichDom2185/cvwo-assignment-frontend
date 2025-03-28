@@ -9,7 +9,7 @@ import FormTextInputElement from "./FormTextInputElement";
 import LogoButton from "./LogoButton";
 
 type Props = {
-  type: string;
+  type: "login" | "signup";
 };
 
 const LoginForm: React.FC<Props> = ({ type }) => {
