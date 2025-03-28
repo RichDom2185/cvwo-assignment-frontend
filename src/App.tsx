@@ -3,7 +3,6 @@ import "./App.scss";
 import DetailsPage from "./pages/DetailsPage";
 import LoginPage from "./pages/LoginPage";
 import MainPage from "./pages/MainPage";
-// import TestingPage from './pages/TestingPage';
 
 function App() {
   return (
@@ -13,7 +12,6 @@ function App() {
         <Route path="/login" element={<LoginPage type="login" />} />
         <Route path="/signup" element={<LoginPage type="signup" />} />
         <Route path="/details/:id" element={<DetailsPage />} />
-        {/* <Route path="/testing" element={<TestingPage />} /> */}
       </Routes>
     </Router>
   );
