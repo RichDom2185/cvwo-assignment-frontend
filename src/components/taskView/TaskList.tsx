@@ -80,8 +80,8 @@ const TaskList: React.FC = () => {
           ))}
         {!displayedList.length && (
           <div className="flex gap-2 py-2">
-            <div className="transition flex-grow flex flex-wrap items-center gap-4 justify-between px-4 py-3 rounded-2xl cursor-pointer">
-              <p className="flex-shrink text-gray-500 m-auto italic">
+            <div className="transition grow flex flex-wrap items-center gap-4 justify-between px-4 py-3 rounded-2xl cursor-pointer">
+              <p className="shrink text-gray-500 m-auto italic">
                 No tasks found
               </p>
             </div>

@@ -21,7 +21,7 @@ const CollapseSidebarButton: React.FC<Props> = (props) => {
         <HiOutlineChevronDoubleLeft />
       )}
       {!props.collapsed && (
-        <span className="flex-grow text-center uppercase text-sm font-medium mx-2 tracking-wider leading-none select-none">
+        <span className="grow text-center uppercase text-sm font-medium mx-2 tracking-wider leading-none select-none">
           Collapse Sidebar
         </span>
       )}

@@ -154,7 +154,7 @@ const DatePicker: React.FC<Props> = ({ initialDate, callback }) => {
         <input
           type="text"
           readOnly
-          className="transition duration-100 cursor-pointer w-full pl-4 pr-10 py-3 leading-none appearance-none  focus:outline-none text-gray-600 border-b border-gray-200 focus:border-blue-500"
+          className="transition duration-100 cursor-pointer w-full pl-4 pr-10 py-3 leading-none appearance-none focus:outline-hidden text-gray-600 border-b border-gray-200 focus:border-blue-500"
           placeholder="Select date"
           value={format(selectedDate, "E, dd MMM yyyy")}
           onClick={toggleDatepicker}
@@ -183,7 +183,7 @@ const DatePicker: React.FC<Props> = ({ initialDate, callback }) => {
               {/* {type === "date" && (
                         <div
                           onClick={showMonthPicker}
-                          className="flex-grow p-1 text-lg font-bold text-gray-800 cursor-pointer hover:bg-gray-200 rounded-lg"
+                          className="grow p-1 text-lg font-bold text-gray-800 cursor-pointer hover:bg-gray-200 rounded-lg"
                         >
                           <p className="text-center">
                             {format(datepickerHeaderDate, "MMMM")}
@@ -192,7 +192,7 @@ const DatePicker: React.FC<Props> = ({ initialDate, callback }) => {
                       )}
                       <div
                         onClick={showYearPicker}
-                        className="flex-grow p-1 text-lg font-bold text-gray-800 cursor-pointer hover:bg-gray-200 rounded-lg"
+                        className="grow p-1 text-lg font-bold text-gray-800 cursor-pointer hover:bg-gray-200 rounded-lg"
                       >
                         <p className="text-center">
                           {format(datepickerHeaderDate, "yyyy")}
@@ -201,7 +201,7 @@ const DatePicker: React.FC<Props> = ({ initialDate, callback }) => {
               {type === "date" && (
                 <div
                   onClick={showMonthPicker}
-                  className="transition flex-grow p-1 text-lg font-semibold text-gray-800 cursor-pointer hover:bg-gray-200 rounded-lg"
+                  className="transition grow p-1 text-lg font-semibold text-gray-800 cursor-pointer hover:bg-gray-200 rounded-lg"
                 >
                   <p className="text-center">
                     {format(datepickerHeaderDate, "MMMM yyyy")}
@@ -211,7 +211,7 @@ const DatePicker: React.FC<Props> = ({ initialDate, callback }) => {
               {type === "month" && (
                 <div
                   onClick={showYearPicker}
-                  className="transition flex-grow p-1 text-lg font-semibold text-gray-800 cursor-pointer hover:bg-gray-200 rounded-lg"
+                  className="transition grow p-1 text-lg font-semibold text-gray-800 cursor-pointer hover:bg-gray-200 rounded-lg"
                 >
                   <p className="text-center">
                     {format(datepickerHeaderDate, "yyyy")}

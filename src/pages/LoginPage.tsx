@@ -9,7 +9,7 @@ interface Props {
 const LoginPage: React.FC<Props> = ({ type }) => {
   return (
     <div className="min-h-screen bg-gray-200 flex">
-      <div className="flex-grow flex flex-col justify-center items-center pt-6 sm:pb-6">
+      <div className="grow flex flex-col justify-center items-center pt-6 sm:pb-6">
         <Link to="/">
           <div id="logo" className="flex space-x-4 mx-4 mb-8">
             <img

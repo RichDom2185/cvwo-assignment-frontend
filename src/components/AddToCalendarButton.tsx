@@ -26,7 +26,7 @@ const AddToCalendarButton: React.FC<Props> = ({ item }) => {
 
   return (
     <button
-      className="transition bg-blue-500 hover:bg-blue-600 text-white font-outfit font-medium tracking-wide px-3 py-2 rounded space-x-3 flex items-center shadow-md"
+      className="transition bg-blue-500 hover:bg-blue-600 text-white font-outfit font-medium tracking-wide px-3 py-2 rounded-sm space-x-3 flex items-center shadow-md"
       onClick={handleClick}
     >
       <FaRegCalendarPlus size={20} className="inline" />

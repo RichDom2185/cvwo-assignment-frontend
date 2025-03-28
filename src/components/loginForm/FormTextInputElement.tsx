@@ -19,7 +19,7 @@ const FormTextInputElement: React.FC<Props> = ({
     <div className="flex flex-col space-y-2 mt-3 first:mt-0">
       <label
         htmlFor={name}
-        className="flex-grow text-left text-gray-500 tracking-wide font-medium text-sm"
+        className="grow text-left text-gray-500 tracking-wide font-medium text-sm"
       >
         {label}
       </label>
@@ -30,7 +30,7 @@ const FormTextInputElement: React.FC<Props> = ({
         value={value}
         onChange={changeHandler}
         placeholder={placeholder}
-        className="transition border border-transparent focus:border-blue-300 bg-gray-100 focus:bg-sky-100 rounded px-3 py-2 w-full focus:outline-none"
+        className="transition border border-transparent focus:border-blue-300 bg-gray-100 focus:bg-sky-100 rounded-sm px-3 py-2 w-full focus:outline-hidden"
       />
     </div>
   );

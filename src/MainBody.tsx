@@ -5,9 +5,9 @@ import TaskList from "./components/taskView/TaskList";
 
 const MainBody = () => {
   return (
-    <div className="h-screen flex-grow flex flex-col">
+    <div className="h-screen grow flex flex-col">
       <Appbar />
-      <div className="main-body flex-grow overflow-y-auto p-6 space-y-4">
+      <div className="main-body grow overflow-y-auto p-6 space-y-4">
         <h1 className="font-display text-6xl">Hello, User 😀</h1>
         <p>
           Start adding your tasks here! They are saved when you close the

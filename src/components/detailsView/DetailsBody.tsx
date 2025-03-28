@@ -147,9 +147,9 @@ const DetailsBody: React.FC<Props> = ({ todoItemId }) => {
   };
 
   return (
-    <div className="h-screen flex-grow flex flex-col">
+    <div className="h-screen grow flex flex-col">
       <Appbar />
-      <div className="main-body flex-grow overflow-y-auto p-6 space-y-12">
+      <div className="main-body grow overflow-y-auto p-6 space-y-12">
         <form
           className="w-full max-w-6xl space-y-3 mx-auto"
           onSubmit={formSubmitHandler}
@@ -160,7 +160,7 @@ const DetailsBody: React.FC<Props> = ({ todoItemId }) => {
               name="title"
               id="title"
               placeholder="Title"
-              className="flex-grow transition font-outfit font-medium text-2xl tracking-wide appearance-none border-b focus:border-blue-500 text-gray-700 py-2 px-2 leading-tight focus:outline-none"
+              className="grow transition font-outfit font-medium text-2xl tracking-wide appearance-none border-b focus:border-blue-500 text-gray-700 py-2 px-2 leading-tight focus:outline-hidden"
               onChange={formChangeHandler}
               value={todo.title}
             />
@@ -188,7 +188,7 @@ const DetailsBody: React.FC<Props> = ({ todoItemId }) => {
                 name="add-tags"
                 id="add-tags"
                 placeholder="Add Tags"
-                className="w-full transition appearance-none border-b focus:border-blue-500 text-gray-700 py-2 px-2 leading-tight focus:outline-none"
+                className="w-full transition appearance-none border-b focus:border-blue-500 text-gray-700 py-2 px-2 leading-tight focus:outline-hidden"
                 value={addTag}
                 onChange={tagOnChangeHandler}
                 onKeyDown={tagFormKeyDownHandler}
@@ -221,7 +221,7 @@ const DetailsBody: React.FC<Props> = ({ todoItemId }) => {
                   <textarea
                     id="description"
                     name="description"
-                    className="w-full h-96 resize-none bg-transparent focus:outline-none"
+                    className="w-full h-96 resize-none bg-transparent focus:outline-hidden"
                     onChange={formChangeHandler}
                     value={todo.description}
                   />

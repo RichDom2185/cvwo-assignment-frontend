@@ -35,17 +35,17 @@ const Task: React.FC<Props> = ({
     <div className="flex gap-2 py-2">
       <TaskCheckbox checked={checked} onChange={onChange} />
       <div
-        className="transition flex-grow flex flex-wrap items-center gap-4 justify-between px-4 py-3 hover:bg-gray-100 rounded-2xl cursor-pointer"
+        className="transition grow flex flex-wrap items-center gap-4 justify-between px-4 py-3 hover:bg-gray-100 rounded-2xl cursor-pointer"
         onClick={onClickHandler(id)}
       >
         <p
           className={
-            "flex-shrink" + (checked ? " line-through text-gray-500" : "")
+            "shrink" + (checked ? " line-through text-gray-500" : "")
           }
         >
           {text}
         </p>
-        <div className="tags flex-grow flex flex-wrap space-x-2 justify-end">
+        <div className="tags grow flex flex-wrap space-x-2 justify-end">
           {tags &&
             tags.map((tag, index) => (
               <Tag

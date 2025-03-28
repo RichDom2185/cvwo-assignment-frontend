@@ -17,7 +17,7 @@ const Tab: React.FC<Props> = ({
   return (
     <li
       className={
-        "px-2 rounded bg-gray-100 text-gray-600 cursor-pointer select-none " +
+        "px-2 rounded-sm bg-gray-100 text-gray-600 cursor-pointer select-none " +
         (isColored ? generateColorClasses(colorFromTag(tabName)) : "") +
         (disabled
           ? ""

@@ -9,7 +9,7 @@ interface Props {
 const UserModalButton: React.FC<Props> = ({ children, linkTo }) => {
   return (
     <Link to={linkTo}>
-      <div className="px-2 py-1 text-sm rounded bg-white shadow-sm hover:shadow">
+      <div className="px-2 py-1 text-sm rounded-sm bg-white shadow-xs hover:shadow-sm">
         {children}
       </div>
     </Link>

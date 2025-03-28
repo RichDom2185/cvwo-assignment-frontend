@@ -8,7 +8,7 @@ interface Props {
 
 const Tabbar: React.FC<Props> = ({ activeTabs, updateFilter }) => {
   return (
-    <div className="flex items-center gap-x-3 bg-blue-200 shadow-sm shadow-blue-300 px-3 rounded-t-2xl">
+    <div className="flex items-center gap-x-3 bg-blue-200 shadow-xs shadow-blue-300 px-3 rounded-t-2xl">
       <span className="font-outfit">Viewing:</span>
       <ul id="tags" className="flex items-center space-x-2 my-2">
         {activeTabs.map((tab, index) => (

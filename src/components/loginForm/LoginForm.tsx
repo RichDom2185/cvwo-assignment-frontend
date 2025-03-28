@@ -123,7 +123,7 @@ const LoginForm: React.FC<Props> = ({ type }) => {
         />
         <button
           type="submit"
-          className="mt-10 focus:outline-none font-bold transition bg-white hover:bg-blue-700 focus:bg-blue-700 hover:text-white focus:text-white shadow-lg hover:shadow-blue-200 focus:shadow-blue-200 px-3 py-2 rounded-lg w-full"
+          className="mt-10 focus:outline-hidden font-bold transition bg-white hover:bg-blue-700 focus:bg-blue-700 hover:text-white focus:text-white shadow-lg hover:shadow-blue-200 focus:shadow-blue-200 px-3 py-2 rounded-lg w-full"
         >
           {type === "login" ? "Sign In" : "Create Account"}
         </button>

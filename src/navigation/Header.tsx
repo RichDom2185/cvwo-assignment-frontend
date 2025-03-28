@@ -38,7 +38,7 @@ const Header: React.FC = () => {
     // <header className="site-header bg-gray-50 fixed top-0 bottom-0 left-0 flex flex-col font-outfit">
     <header
       id="sidebar"
-      className="transition-all duration-300 site-header bg-gray-50 h-screen flex flex-col font-outfit p-4 shadow"
+      className="transition-all duration-300 site-header bg-gray-50 h-screen flex flex-col font-outfit p-4 shadow-sm"
     >
       <CollapseSidebarButton onClick={collapseSidebar} collapsed={collapsed} />
       <h1
@@ -52,7 +52,7 @@ const Header: React.FC = () => {
       </h1>
       <div
         className={
-          "header-content flex flex-col flex-grow justify-between" +
+          "header-content flex flex-col grow justify-between" +
           (collapsed ? " hidden" : "")
         }
       >
