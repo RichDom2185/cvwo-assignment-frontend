@@ -1,11 +1,11 @@
 import { colorFromTag, generateColorClasses } from "../../utils/tag";
 
-interface Props {
+type Props = {
   tabName: string;
   disabled?: boolean;
   isColored?: boolean;
   callback?: React.MouseEventHandler;
-}
+};
 
 const Tab: React.FC<Props> = ({
   tabName,

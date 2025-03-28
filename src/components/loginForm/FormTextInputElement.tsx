@@ -1,10 +1,10 @@
-interface Props {
+type Props = {
   name: string;
   label: string;
   value: string;
   placeholder?: string;
   changeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}
+};
 
 const FormTextInputElement: React.FC<Props> = ({
   name,

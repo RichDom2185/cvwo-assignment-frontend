@@ -1,9 +1,9 @@
 import { Link } from "react-router";
 
-interface Props {
+type Props = {
   children: React.ReactNode;
   linkTo: string;
-}
+};
 
 const UserModalButton: React.FC<Props> = ({ children, linkTo }) => {
   return (

@@ -1,7 +1,7 @@
-export interface Props {
+type Props = {
   checked: boolean;
   onChange: React.ChangeEventHandler;
-}
+};
 
 const TaskCheckbox: React.FC<Props> = ({ checked, onChange }) => {
   return checked ? (

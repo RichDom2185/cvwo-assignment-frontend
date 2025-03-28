@@ -3,14 +3,14 @@ import { colorFromTag } from "../../utils/tag";
 import Tag from "./Tag";
 import TaskCheckbox from "./TaskCheckbox";
 
-export interface Props {
+type Props = {
   id: string;
   checked: boolean;
   onChange: React.ChangeEventHandler;
   title?: string;
   tags?: string[];
   updateFilter: (tagName: string) => React.MouseEventHandler;
-}
+};
 
 const defaultText: string = "Untitled To-Do";
 

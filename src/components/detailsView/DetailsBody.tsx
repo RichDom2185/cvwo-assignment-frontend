@@ -13,9 +13,9 @@ import FormLabel from "../detailsView/FormLabel";
 import DeleteTaskButton from "./DeleteTaskButton";
 import SaveTaskButton from "./SaveTaskButton";
 
-interface Props {
+type Props = {
   todoItemId: string;
-}
+};
 
 const DetailsBody: React.FC<Props> = ({ todoItemId }) => {
   const { getStorageToken } = useLocalStorage("token");

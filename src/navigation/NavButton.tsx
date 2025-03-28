@@ -1,8 +1,8 @@
-export interface Props {
+type Props = {
   text: string;
   href?: string;
   onclick?: (e?: Event) => void;
-}
+};
 
 const NavButton: React.FC<Props> = (props) => {
   return (

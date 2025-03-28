@@ -1,9 +1,9 @@
 import { FaRegCalendarPlus } from "react-icons/fa";
 import { TodoItem } from "../types/todo";
 
-interface Props {
+type Props = {
   item: TodoItem;
-}
+};
 
 const AddToCalendarButton: React.FC<Props> = ({ item }) => {
   const handleClick: React.MouseEventHandler = () => {

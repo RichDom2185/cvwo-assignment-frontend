@@ -3,10 +3,10 @@ import {
   HiOutlineChevronDoubleRight,
 } from "react-icons/hi";
 
-interface Props {
+type Props = {
   onClick: React.MouseEventHandler;
   collapsed: boolean;
-}
+};
 
 const CollapseSidebarButton: React.FC<Props> = (props) => {
   return (

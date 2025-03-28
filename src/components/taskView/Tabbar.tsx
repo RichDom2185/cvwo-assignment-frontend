@@ -1,9 +1,9 @@
 import Tab from "./Tab";
 
-interface Props {
+type Props = {
   activeTabs: string[];
   updateFilter: (tagName: string) => React.MouseEventHandler;
-}
+};
 
 const Tabbar: React.FC<Props> = ({ activeTabs, updateFilter }) => {
   return (

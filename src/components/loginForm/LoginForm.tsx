@@ -8,9 +8,9 @@ import { useLocalStorage } from "../../utils/hooks";
 import FormTextInputElement from "./FormTextInputElement";
 import LogoButton from "./LogoButton";
 
-interface Props {
+type Props = {
   type: string;
-}
+};
 
 const LoginForm: React.FC<Props> = ({ type }) => {
   const [form, setForm] = useState({

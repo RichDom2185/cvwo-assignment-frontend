@@ -1,9 +1,9 @@
 import { FiX } from "react-icons/fi";
 
-interface Props {
+type Props = {
   tagName: string;
   clickFunction: React.MouseEventHandler<HTMLSpanElement>;
-}
+};
 
 const TagChip: React.FC<Props> = ({ tagName, clickFunction }: Props) => {
   return (

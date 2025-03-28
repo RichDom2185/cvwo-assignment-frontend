@@ -1,12 +1,12 @@
 import { TagColor } from "../../types/tag";
 import { generateColorClasses } from "../../utils/tag";
 
-export interface Props {
+type Props = {
   tagName: string;
   color: TagColor;
   checked: boolean;
   callback?: React.MouseEventHandler;
-}
+};
 
 const Tag: React.FC<Props> = (props) => {
   const bgColor: TagColor = props.checked ? TagColor.GRAY : props.color;

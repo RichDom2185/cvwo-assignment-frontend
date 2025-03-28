@@ -1,9 +1,9 @@
 import { Link } from "react-router";
 import LoginForm from "../components/loginForm/LoginForm";
 
-interface Props {
+type Props = {
   type: string;
-}
+};
 
 const LoginPage: React.FC<Props> = ({ type }) => {
   return (

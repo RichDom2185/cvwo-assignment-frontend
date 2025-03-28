@@ -18,10 +18,10 @@ import {
 
 type DatepickerType = "date" | "month" | "year";
 
-interface Props {
+type Props = {
   initialDate?: Date;
   callback: (selectedDate: Date) => void;
-}
+};
 
 const DatePicker: React.FC<Props> = ({ initialDate, callback }) => {
   const DAYS = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];

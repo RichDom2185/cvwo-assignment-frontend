@@ -1,8 +1,8 @@
 import { BiTrash } from "react-icons/bi";
 
-interface Props {
+type Props = {
   callback: React.MouseEventHandler;
-}
+};
 
 const DeleteTaskButton: React.FC<Props> = ({ callback }) => {
   return (

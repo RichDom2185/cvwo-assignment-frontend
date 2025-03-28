@@ -1,7 +1,7 @@
-interface Props {
+type Props = {
   children: React.ReactNode;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
-}
+};
 
 const LogoButton: React.FC<Props> = ({ children, onClick }) => {
   return (

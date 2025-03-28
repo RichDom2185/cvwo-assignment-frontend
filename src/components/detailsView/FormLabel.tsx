@@ -1,7 +1,7 @@
-interface Props {
+type Props = {
   htmlFor: string;
   children: React.ReactNode;
-}
+};
 
 const FormLabel: React.FC<Props> = ({ htmlFor, children }) => {
   return (
